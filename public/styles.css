@@ -1,0 +1,56 @@
+body {
+  background-color: black;
+}
+
+.mycontainer {
+  background-color: black;
+  color: white;
+  width: 40%;
+  min-width: 400px;
+  margin: 10px auto;
+}
+
+li {
+  font-size: 1.2rem;
+  padding: 5px 0;
+}
+
+li div {
+  vertical-align: text-top;
+}
+
+.itemP,
+#itemCheck {
+  display: inline-block;
+}
+
+.itemP {
+  width: 83%;
+  margin-right: 5%;
+  margin-bottom: 0%;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+#itemCheck {
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+}
+
+.itemInput {
+  width: 85%;
+  background-color: black;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #fff;
+}
+
+#addButton {
+  background: black;
+  color: #fff;
+  border: none;
+  margin: 0 10% 3px 90%;
+}
