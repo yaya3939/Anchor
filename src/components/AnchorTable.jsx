@@ -1,23 +1,21 @@
 import React from "react";
+import InputArea from "./InputArea";
 
 function AnchorTable() {
   return (
-    <div>
-      <div>
-        <h1>title</h1>
-        <p>time</p>
-      </div>
-      <div>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-      </div>
-      <div>
-        <input type="text" />
-      </div>
-    </div>
+    <table className="anchorTable">
+      <tr>
+        <td className="anchorTitle">
+          <h1>title</h1>
+          <hr />
+          <p>time</p>
+        </td>
+        <td>
+          <button className="anchorProgress"></button>
+          <InputArea className="anchorInput" placeholder="How's your day" />
+        </td>
+      </tr>
+    </table>
   );
 }
 

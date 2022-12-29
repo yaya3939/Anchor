@@ -19,6 +19,7 @@ li div {
   vertical-align: text-top;
 }
 
+/* item */
 .itemP,
 #itemCheck {
   display: inline-block;
@@ -53,4 +54,37 @@ li div {
   color: #fff;
   border: none;
   margin: 0 10% 3px 90%;
+}
+
+/* anchor */
+.anchorTable {
+  border-collapse: separate;
+  /* 如果我们直接对table设置border-radius是不会生效的，
+   因为table的默认属性border-collapse值为collapse。
+   border-collapse:collapse和border-radius不兼容。
+   因此，我们需要将border-collapse的值设置为separate即可。 */
+  border: 3px solid rgba(195, 195, 195, 0.5);
+  border-radius: 10px;
+  width: 70%;
+  margin: auto;
+}
+
+.anchorTitle {
+  width: 30%;
+  text-align: center;
+  padding: 5px 15px;
+}
+
+.anchorTitle h1 {
+}
+
+.anchorTitle hr {
+  margin: 0;
+}
+
+.anchorInput {
+  background-color: black;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #fff;
 }

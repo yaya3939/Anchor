@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Item from "./Item";
+import InputArea from "./InputArea";
 import { AddBox } from "@mui/icons-material";
 
 function ItemTable() {
@@ -8,23 +9,15 @@ function ItemTable() {
     setClicked(true);
   }
 
-  const [inputText, setInputText] = useState("");
-  function handleChange(event) {
-    const newValue = event.target.value;
-    setInputText(newValue);
-  }
-
   const item1 = "welcome to anchor.";
   const item2 = "click +, input the todo item, and press enter key";
   const [items, setItems] = useState([item1, item2]);
-  function handleEnter(event) {
+  function handleEnter(event, inputText) {
     const enter = event.code;
     if (enter === "Enter") {
       setItems((prevItems) => {
         return [...prevItems, inputText];
       });
-      console.log(items);
-      setInputText("");
     }
   }
 
@@ -67,13 +60,10 @@ function ItemTable() {
         })}
         {clicked && (
           <li>
-            <input
+            <InputArea
               className="itemInput"
-              type="text"
               placeholder="What you gonna do?"
-              value={inputText}
-              onChange={handleChange}
-              onKeyDown={handleEnter}
+              keyDown={handleEnter}
             />
           </li>
         )}

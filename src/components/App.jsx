@@ -9,6 +9,7 @@ function App() {
   return (
     <div className="mycontainer">
       <NaviBar />
+      <AnchorTable />
       <ItemTable />
       <Footer />
     </div>
