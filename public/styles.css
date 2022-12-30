@@ -53,7 +53,7 @@ li div {
   background: black;
   color: #fff;
   border: none;
-  margin: 0 10% 3px 90%;
+  margin: 0 11% 3px 89%;
 }
 
 /* anchor */
@@ -66,20 +66,30 @@ li div {
   border: 3px solid rgba(195, 195, 195, 0.5);
   border-radius: 10px;
   width: 70%;
-  margin: auto;
+  margin: 20px auto;
 }
 
 .anchorTitle {
   width: 30%;
   text-align: center;
-  padding: 5px 15px;
+  padding: 5px 30px 5px 15px;
 }
 
 .anchorTitle h1 {
+  font-size: 1.5rem;
+  background-color: #ff6d75;
+  border-radius: 5px;
 }
 
 .anchorTitle hr {
   margin: 0;
+}
+
+.anchorTitle p {
+  margin: 0 auto;
+}
+
+.anchorDetail {
 }
 
 .anchorInput {
