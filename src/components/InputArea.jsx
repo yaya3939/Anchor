@@ -8,21 +8,19 @@ function InputArea(props) {
   }
 
   return (
-    <div>
-      <input
-        className={props.className}
-        type="text"
-        placeholder={props.placeholder}
-        value={inputText}
-        onChange={handleChange}
-        onKeyDown={(event) => {
-          props.keyDown(event, inputText);
-          if (event.code === "Enter") {
-            setInputText("");
-          }
-        }}
-      />
-    </div>
+    <input
+      className={props.className}
+      type="text"
+      placeholder={props.placeholder}
+      value={inputText}
+      onChange={handleChange}
+      onKeyDown={(event) => {
+        props.keyDown(event, inputText);
+        if (event.code === "Enter") {
+          setInputText("");
+        }
+      }}
+    />
   );
 }
 

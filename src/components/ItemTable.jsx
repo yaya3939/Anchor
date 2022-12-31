@@ -6,7 +6,7 @@ import { AddBox } from "@mui/icons-material";
 function ItemTable() {
   const [clicked, setClicked] = useState(false);
   function addInput() {
-    setClicked(true);
+    setClicked(!clicked);
   }
 
   const item1 = "welcome to anchor.";
