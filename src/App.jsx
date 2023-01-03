@@ -1,9 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NaviBar from "./NaviBar";
-import Footer from "./Footer";
-import AnchorTable from "./AnchorTable";
-import ItemTable from "./ItemTable";
+import NaviBar from "./components/NaviBar";
+import Footer from "./components/Footer";
+import AnchorTable from "./components/anchor/AnchorTable";
+import ItemTable from "./components/ItemTable";
 
 function App() {
   return (

@@ -79,6 +79,8 @@ li div {
 .anchorTitle h1 {
   font-size: 1.5rem;
   border-radius: 5px;
+  width: 100px;
+  word-break: break-all;
 }
 
 .anchorTitle hr {

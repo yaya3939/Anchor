@@ -1,6 +1,6 @@
 import React from "react";
-import Progress from "./Progress";
-import InputArea from "./InputArea";
+import Progress from "../Progress";
+import InputArea from "../InputArea";
 
 export default function AnchorItem(props) {
   return (
@@ -8,12 +8,12 @@ export default function AnchorItem(props) {
       <tbody>
         <tr>
           <td className="anchorTitle">
-            <h1>{props.title}</h1>
+            <h1 style={props.backgroundColor}>{props.title}</h1>
             <hr />
             <p>{props.days}</p>
           </td>
           <td className="anchorDetail">
-            <Progress />
+            <Progress ratingcolor={props.ratingcolor} />
             <InputArea
               className="anchorDetailInput"
               placeholder="How's your day"

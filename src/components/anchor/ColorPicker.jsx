@@ -24,7 +24,7 @@ export default function ColorPicker(props) {
         onClick={colorDisplay}
       ></button>
       {colorDisplayed && (
-        <div className="pickers">
+        <div className="pickers" onClick={colorDisplay}>
           <CompactPicker
             color={props.color}
             onChangeComplete={props.colorChange}

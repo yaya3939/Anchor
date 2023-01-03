@@ -6,14 +6,7 @@ import RectangleIcon from "@mui/icons-material/Rectangle";
 import RectangleOutlinedIcon from "@mui/icons-material/RectangleOutlined";
 import { grey } from "@mui/material/colors";
 
-const StyledRating = styled(Rating)({
-  "& .MuiRating-iconFilled": {
-    color: "#ff6d75",
-  },
-  "& .MuiRating-iconHover": {
-    color: "#ff3d47",
-  },
-});
+const StyledRating = styled(Rating)({});
 
 const labels = {
   1: "25%",
@@ -27,7 +20,7 @@ function getLabelText(value) {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 }
 
-export default function Progress() {
+export default function Progress(props) {
   const [value, setValue] = React.useState(0);
   const [hover, setHover] = React.useState(-1);
 
@@ -40,6 +33,7 @@ export default function Progress() {
       }}
     >
       <StyledRating
+        sx={props.ratingcolor}
         name="hover-feedback"
         value={value}
         precision={1}
