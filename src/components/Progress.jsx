@@ -12,8 +12,8 @@ const labels = {
   1: "25%",
   2: "50%",
   3: "75%",
-  4: "100%!",
-  5: "120%!!!",
+  4: "100%",
+  5: "wow!",
 };
 
 function getLabelText(value) {
@@ -50,7 +50,7 @@ export default function Progress(props) {
         }
       />
       {value !== null && (
-        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+        <Box sx={{ ml: 1 }}>{labels[hover !== -1 ? hover : value]}</Box>
       )}
     </Box>
   );

@@ -7,15 +7,6 @@ export default function ColorPicker(props) {
     setColorDisplayed(!colorDisplayed);
   }
 
-  // const [color, setColor] = useState({
-  //   r: "255",
-  //   g: "255",
-  //   b: "255",
-  // });
-  // function handleColor(color) {
-  //   setColor(color.rgb);
-  // }
-
   return (
     <div className="blocks">
       <button

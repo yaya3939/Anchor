@@ -4,7 +4,7 @@ import InputArea from "../InputArea";
 
 export default function AnchorItem(props) {
   return (
-    <table className="anchorTable">
+    <table className="anchorItem">
       <tbody>
         <tr>
           <td className="anchorTitle">

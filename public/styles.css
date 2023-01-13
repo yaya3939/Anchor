@@ -1,37 +1,70 @@
 body {
   background-color: black;
+  color: white;
+  margin: 0;
+  max-width: 100vw;
 }
 
 .mycontainer {
-  background-color: black;
-  color: white;
-  width: 40%;
-  min-width: 400px;
-  margin: 10px auto;
+  position: relative;
+  /*让其子元素的位置可以被设定为absolute */
+  min-height: 100vh;
+  /* 在post占不满viewport时，也不会让footer杠在页面中间 */
 }
 
-li {
+.content-container {
+  padding-bottom: 100px;
+  /*margin无法解决因为位置不互斥，只能用padding强行加大content本身的面积制造距离  */
+}
+
+.navBar {
+  display: flex;
+  justify-content: center;
+  /* 为了居中显示 */
+  margin: 20px 0;
+}
+
+.NavHome {
+  position: relative;
+  top: -3px;
+  /* 解决文字与图片位置中线不一致 */
+}
+
+.footer {
+  position: absolute;
+  /*to mycontainer, 但是因为中间的content里加了npm所以他和content的盒子之间的位置不是互斥的，出现占位问题*/
+  bottom: 0px;
+  /* margin: 10px 0; */
+  text-align: center;
+  width: 100%;
+}
+
+/* item */
+ol {
+  margin: 10px 0 20px 0;
+}
+
+li,
+.itemInput {
   font-size: 1.2rem;
-  padding: 5px 0;
+  padding: 1.5px 0;
 }
 
 li div {
   vertical-align: text-top;
 }
 
-/* item */
 .itemP,
 #itemCheck {
   display: inline-block;
 }
 
 .itemP {
-  width: 83%;
-  margin-right: 5%;
-  margin-bottom: 0%;
+  width: 300px;
   background-color: black;
   color: white;
   border: none;
+  word-wrap: break-word; /* 中文会自动换行，但英文如果没有这项就不会换行 */
 }
 
 #itemCheck {
@@ -39,10 +72,11 @@ li div {
   color: #fff;
   border: none;
   border-radius: 50%;
+  margin-left: 55px;
 }
 
 .itemInput {
-  width: 85%;
+  width: 80%;
   background-color: black;
   color: white;
   border: none;
@@ -51,14 +85,21 @@ li div {
 
 #addButton,
 #addAnchor {
+  position: absolute;
+  display: inline-block;
   background: black;
   color: #fff;
   border: none;
-  margin: 0 11% 3px 89%;
+  margin-left: 400px;
+  margin-bottom: 10px;
 }
 
 /* anchor */
-.anchorTable {
+/* .anchorTable {
+} */
+
+.anchorItem {
+  display: inline-block;
   border-collapse: separate;
   /* 如果我们直接对table设置border-radius是不会生效的，
    因为table的默认属性border-collapse值为collapse。
@@ -66,14 +107,14 @@ li div {
    因此，我们需要将border-collapse的值设置为separate即可。 */
   border: 3px solid rgba(195, 195, 195, 0.5);
   border-radius: 10px;
-  width: 70%;
-  margin: 20px auto;
+  width: 300px;
+  margin: 10px 20px;
 }
 
 .anchorTitle {
   width: 30%;
   text-align: center;
-  padding: 5px 30px 5px 15px;
+  padding: 10px 10px;
 }
 
 .anchorTitle h1 {
@@ -81,13 +122,17 @@ li div {
   border-radius: 5px;
   width: 100px;
   word-break: break-all;
+  padding-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 
 .anchorTitle hr {
   margin: 0;
 }
 
-.anchorTitle p {
+.anchorTitle p,
+.dateBar {
   margin: 0 auto;
 }
 
@@ -96,6 +141,7 @@ li div {
   color: white;
   border: none;
   border-bottom: 1px solid #fff;
+  margin-top: 5px;
 }
 
 .anchorTitleInput {
@@ -103,10 +149,10 @@ li div {
   border-radius: 5px;
   background-color: gray;
   color: #fff;
-  width: 40%;
+  width: 100px;
   font-size: 1.3rem;
   text-align: center;
-  margin: 10px;
+  margin: 5px;
   vertical-align: middle;
 }
 
@@ -119,7 +165,7 @@ li div {
   height: 30px;
   border: none;
   border-radius: 5px;
-  margin: 10px;
+  margin: 10px 30px;
   vertical-align: middle;
 }
 
@@ -127,12 +173,7 @@ li div {
   position: absolute;
 }
 
-.dateBar {
-  display: inline-block;
-  margin: 10px;
-}
-
 #addAnchor {
-  display: inline-block;
-  margin: unset;
+  position: unset;
+  margin: 10px 30px 10px 0;
 }
