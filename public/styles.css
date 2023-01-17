@@ -98,7 +98,8 @@ li div {
 /* .anchorTable {
 } */
 
-.anchorItem {
+.anchorItem,
+.anchorRecordTable {
   display: inline-block;
   border-collapse: separate;
   /* 如果我们直接对table设置border-radius是不会生效的，
@@ -154,6 +155,33 @@ li div {
   text-align: center;
   margin: 5px;
   vertical-align: middle;
+}
+
+.anchorRecordTable {
+  width: 250px;
+}
+
+.anchorRecordTable .anchorTitle {
+  margin: 0 auto;
+  width: unset;
+  padding-bottom: 0;
+}
+
+.anchorRecordTable .anchorTitle h1 {
+  display: inline-block;
+  width: unset;
+}
+
+.anchorRecordTable .anchorTitle p {
+  display: inline-block;
+  padding-left: 7px;
+}
+
+.monthHeatmap {
+  margin: 0 auto;
+  width: 350px;
+  padding-left: 13px;
+  margin-top: -5px;
 }
 
 .blocks {

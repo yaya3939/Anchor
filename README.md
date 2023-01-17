@@ -83,3 +83,9 @@
   像 contact 一样，左边是 navibar 的感觉，右边 child 显示
   但是还是会有屏幕缩进带来的显示问题
 - 不要忘记最后为了 ux，要加上 loading 状况怎么做
+
+**1/17**
+
+- 用 api 把 anchors 页面做了，还剩 records 的颜色问题。
+  在 element 指代的 rect 里是可以用 style="fill:red" 进行更改的，但是不知道怎么在 js 里完成
+  试试到时候自己改造一下 api？
