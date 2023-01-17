@@ -73,3 +73,13 @@
 - 整理依赖包：把 navbar 用的 bootstrap 改成 material-ui/react router
 - 重新整理 css，改成全页面双栏，随着页面缩进，双栏纵向叠加
 - 1/13 完成
+
+**1/13**
+
+- 把 react-calendar-heatmap 的源码学一下，ds.js 学一下，把 anchor 的每日数据可视化做出来
+- anchors 页面的两个页面要怎么做呢？
+  × 1、grid 分栏+click 显示/conditional rendering，但是缩页面以后的显示的上下栏形式 NG
+  2、anchors route 里嵌套新的 router 就好了，之前想到过的，忘了 hhh。
+  像 contact 一样，左边是 navibar 的感觉，右边 child 显示
+  但是还是会有屏幕缩进带来的显示问题
+- 不要忘记最后为了 ux，要加上 loading 状况怎么做
