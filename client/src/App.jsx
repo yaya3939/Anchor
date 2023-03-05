@@ -1,16 +1,72 @@
-import React from "react";
+import React, { Fragment, useEffect } from "react";
+import { createBrowserRouter, Outlet } from "react-router-dom";
+import { Alert } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
 import NaviBar from "./components/layout/NaviBar";
 import Footer from "./components/layout/Footer";
-import { Outlet } from "react-router-dom";
+import { Landing } from "./components/layout/Landing";
+import { Register } from "./components/auth/Register";
+import { Login } from "./components/auth/Login";
+import Dashboard from "./components/dashboard/Dashboard";
+import Anchors from "./components/anchors/anchors";
 
-export default function App() {
-  return (
-    <div className="mycontainer">
-      <NaviBar />
-      <div className="content-container">
-        <Outlet />
+import { useSelector, useDispatch } from "react-redux";
+import { loadUser } from "./reducers/auth";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+function SetAlert() {
+  const alerts = useSelector((state) => state.alerts);
+
+  const html =
+    alerts !== null &&
+    alerts.length > 0 &&
+    alerts.map((alert) => (
+      <div key={alert.id}>
+        <Alert severity={`${alert.alertType}`}>{alert.msg}</Alert>
       </div>
-      <Footer />
-    </div>
+    ));
+
+  return html;
+}
+
+function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
+  return (
+    <Fragment>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <NaviBar />
+        <div className="content-container">
+          <SetAlert />
+          <Outlet />
+        </div>
+        <Footer />
+      </ThemeProvider>
+    </Fragment>
   );
 }
+
+export default createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { index: true, element: <Landing /> },
+      { path: "/register", element: <Register /> },
+      { path: "/login", element: <Login /> },
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/anchors", element: <Anchors /> },
+    ],
+  },
+]);

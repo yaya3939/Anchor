@@ -97,14 +97,14 @@ router.post(
   [
     [
       body("email", "Please include a valid email").isEmail(),
-      body("password", "Password is required").exists(),
+      body("password", "Password is required").notEmpty(),
     ],
     validateError,
   ],
   async (req, res) => {
     const { email, password } = req.body;
     try {
-      const user = await User.findById(req.user.id).select("-password");
+      const user = await User.findOne({ email });
       if (!user) {
         return res
           .status(404)

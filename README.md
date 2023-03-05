@@ -97,8 +97,6 @@ router 开始。anchors page 进行中。
 
 - [ ] 数据库：以 user 为单位，还是以 anchor 为单位，建立 anchors
 - [ ] 先不加入 client，要不然测试后端的时候会因为无法重复 set header 出问题
-  - "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
 
 **3/5**
 
