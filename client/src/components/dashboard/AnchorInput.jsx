@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ColorPicker from "./ColorPicker";
-import Daypicker from "./DatePicker";
+import ColorPicker from "../utils/ColorPicker";
+import Daypicker from "../utils/DatePicker";
 import moment from "moment/moment";
 import { addDays } from "date-fns";
 import { AddBox } from "@mui/icons-material";

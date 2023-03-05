@@ -1,9 +1,9 @@
 import React from "react";
-import NaviBar from "../components/NaviBar";
-import Footer from "../components/Footer";
+import NaviBar from "./components/layout/NaviBar";
+import Footer from "./components/layout/Footer";
 import { Outlet } from "react-router-dom";
 
-export default function Root() {
+export default function App() {
   return (
     <div className="mycontainer">
       <NaviBar />

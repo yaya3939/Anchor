@@ -1,6 +1,6 @@
 import React from "react";
-import Progress from "../Progress";
-import InputArea from "../InputArea";
+import Progress from "../utils/Progress";
+import InputArea from "../utils/InputArea";
 
 export default function AnchorItem(props) {
   return (

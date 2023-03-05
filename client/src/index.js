@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./routes/root";
-import Home from "./routes/home";
-import Anchors from "./routes/anchors";
+import App from "./App";
+import Dashboard from "./components/dashboard/dashboard";
+import Anchors from "./components/anchors/anchors";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <App />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <Dashboard /> },
       { path: "/anchors", element: <Anchors /> },
     ],
   },

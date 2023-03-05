@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Item from "./Item";
-import InputArea from "./InputArea";
+import InputArea from "../utils/InputArea";
 import { AddBox } from "@mui/icons-material";
 
 function ItemTable() {

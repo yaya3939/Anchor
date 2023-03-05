@@ -15,17 +15,16 @@
   }
   这个似乎是需要数据库才能完成的事项，先拖着吧
 
-**1**
-
-- 装了两个 css 包，react-boostrap 和 material
+- 想到一个新功能：progress 可以提供三个选择：量，时间，评分
+  评分最简单，五星制，即现有程序。量和时间的逻辑是一致的：自定义五个程度代表的具体数值，在总结页面可以看到所有的量的总和，还可以显示本月，本周的 detail，还有历史 detail
+  另一个选择：保留 progress 新增一个记录量/时间的模块，自定义数量 自定义单位
 
 **12/31**
 
-- 待办事项：把 input 框做好
-- 实际上需要输入有：title 选颜色 时间
-- 可输入的 title，选一个颜色。
-- 时间段选择框：点击 time，跳出日历框，选择最终日期，自动从当日开始计算天数，不选择就会无限重复，选择的话显示剩余天数
-- 1/1 做完
+- [x] (1/1 做完) 把 input 框做好:
+      实际上需要输入有：title 选颜色 时间
+      可输入的 title，选一个颜色。
+      时间段选择框：点击 time，跳出日历框，选择最终日期，自动从当日开始计算天数，不选择就默认 everyday，选择的话显示剩余天数
 
 **1/1**
 
@@ -37,27 +36,28 @@
 **1/3**
 
 - 需要的 array：
-  √ 1、在 home list 的 anchor table 里显示的，anchorItems：记录每个 anchor 的 title，颜色，日期。
-- √ 把不填完不能提交的限制做好。
-  用 if 函数做的，可能有更简单的方法。
-  复习了 required 的用法，在本例中不适用。
-  复习了 object 的比较方法。不能直接用===/==，对顺序、键值一致的函数可以用：
-  JSON.stringify(object1) === JSON.stringify(object2);  
-  或者是  Object.entries(object1).toString() === Object.entries(object2).toString(); （es6 语法）。
-  不一样的只能历遍内容来比较了。
-- √1/4 component tree 做好
-- 试着把一些 props 改成 render props
-- 学 react-router，组建 anchor 页面
+  - [x] 在 home list 的 anchor table 里显示的，anchorItems：记录每个 anchor 的 title，颜色，日期。
+  - [x] 把不填完不能提交的限制做好:
+        用 if 函数做的，可能有更简单的方法。
+        复习了 required 的用法，在本例中不适用。
+        复习了 object 的比较方法。不能直接用===/==，对顺序、键值一致的函数可以用：
+        `JSON.stringify(object1) === JSON.stringify(object2);  `
+        或者是  `Object.entries(object1).toString() === Object.entries(object2).toString();` （es6）。
+        不一样的只能历遍内容来比较了。
+  - [x] (1/4) component tree 做好
+  - [ ] 试着把一些 props 改成 render props
+  - [x] react-router，组建 anchor 页面
 
 **1/10**
 
-- router 开始。anchors page 进行中。
-- navi bar 没有按照当前页面标识点亮，加载时的 ux 极差
-- anchors：三个区块：
-  没有任何 item 的时候：你还没有任何 anchor 记录，快去创建一个吧！
-  进行时：显示当月全部记录，颜色，灰色+四个等级差， 0 和未评价显示灰色。一行八个，四行。
-  未开始（暂时不做，必要性不强）
-  已完成：放在一个 toggle 栏里，显示最后一个月，其余显示与进行时一致
+router 开始。anchors page 进行中。
+
+- [x] navi bar 没有按照当前页面标识点亮，加载时的 ux 极差
+- anchors page：
+  - [ ] 没有任何 item 的时候：你还没有任何 anchor 记录，快去创建一个吧！
+  - [ ] 进行时：显示当月全部记录，颜色，灰色+四个等级差， 0 和未评价显示灰色。一行八个，四行。
+        未开始（暂时不做，必要性不强）
+  - [ ] 已完成：放在一个 toggle 栏里，显示最后一个月，其余显示与进行时一致
 - 内置两个 item，
   设置当月月份的颜色表，每个格子要和日期对应，然后加上 object 里的 rate，color 去显示 color
   颜色，利用 date 确认位置，rate 和 color，rbga 来控制颜色
@@ -65,8 +65,8 @@
   把这两个 item 的显示做好。加一个已完成的 toggle，加两个内置 item 测试
   item：id，name，range，
 - 每个 anchor item 的详细页面。/anchors/:anchorId
-  一个颜色显示区域：限制长宽，超出部分内部滑动。最后有一个每个等级有多少天的总结
-  一个每日记录显示区域：日期+内容
+  - [ ] 一个颜色显示区域：限制长宽，超出部分内部滑动。最后有一个每个等级有多少天的总结
+  - [ ] 一个每日记录显示区域：日期+内容。参考 ui：事线
 
 **1/12**
 
@@ -86,6 +86,21 @@
 
 **1/17**
 
-- 用 api 把 anchors 页面做了，还剩 records 的颜色问题。
-  在 element 指代的 rect 里是可以用 style="fill:red" 进行更改的，但是不知道怎么在 js 里完成
-  试试到时候自己改造一下 api？
+- [ ] 用 api 把 anchors 页面做了，还剩 records 的颜色问题。
+      在 element 指代的 rect 里是可以用 style="fill:red" 进行更改的，但是不知道怎么在 js 里完成
+      试试到时候自己改造一下 api？
+- [ ] 页面缩进后需要把每个 item 的 table 居中。试试 flex 布局？
+- [ ] list 的 responsibility 也要改进，试试改成%
+- [ ] 把 keydown 改成 keyup
+
+**3/4**
+
+- [ ] 数据库：以 user 为单位，还是以 anchor 为单位，建立 anchors
+- [ ] 先不加入 client，要不然测试后端的时候会因为无法重复 set header 出问题
+  - "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+
+**3/5**
+
+- update user name, anchor, record
+- [ ] 时间差问题：date object 是世界时间，比东八少 8h，但是 localString 只会在 string 的时候改成 local，推到 database 还是会变成 object date，然后变成世界时间
