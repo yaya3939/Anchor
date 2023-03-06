@@ -6,10 +6,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import NaviBar from "./components/layout/NaviBar";
 import Footer from "./components/layout/Footer";
-import { Landing } from "./components/layout/Landing";
 import { Register } from "./components/auth/Register";
 import { Login } from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
+import { loader as todoLoader } from "./components/dashboard/TodoList";
 import Anchors from "./components/anchors/anchors";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -62,10 +62,9 @@ export default createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Landing /> },
+      { index: true, element: <Dashboard />, loader: todoLoader },
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
-      { path: "/dashboard", element: <Dashboard /> },
       { path: "/anchors", element: <Anchors /> },
     ],
   },

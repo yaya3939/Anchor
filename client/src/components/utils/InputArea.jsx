@@ -14,8 +14,8 @@ function InputArea(props) {
       placeholder={props.placeholder}
       value={inputText}
       onChange={handleChange}
-      onKeyDown={(event) => {
-        props.keyDown(event, inputText);
+      onKeyUp={(event) => {
+        props.onKeyUp(event, inputText);
         if (event.code === "Enter") {
           setInputText("");
         }

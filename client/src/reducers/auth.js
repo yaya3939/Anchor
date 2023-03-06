@@ -70,10 +70,10 @@ const authSlice = createSlice({
     logoutUser(state, action) {
       localStorage.removeItem("token");
       return {
-        ...state,
         token: null,
         load: false,
         authenticated: false,
+        user: null,
       };
     },
   },

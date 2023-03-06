@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadUser, loginUser } from "../../reducers/auth";
 import { setAlert } from "../../reducers/alert";
 
 export const Login = () => {
   const dispatch = useDispatch();
+  const { authenticated } = useSelector((state) => state.auth);
+
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -31,8 +33,13 @@ export const Login = () => {
       });
     }
   };
+
+  if (authenticated) {
+    return <Navigate to="/" />;
+  }
+
   return (
-    <div className="centerBlock">
+    <div className="centerBlock cloudedGlass">
       <h1 className="large text-primary">Sign In</h1>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">

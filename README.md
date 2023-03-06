@@ -15,9 +15,35 @@
   }
   这个似乎是需要数据库才能完成的事项，先拖着吧
 
-- 想到一个新功能：progress 可以提供三个选择：量，时间，评分
+  **可能性**
+
+- progress 可以提供三个选择：量，时间，评分
   评分最简单，五星制，即现有程序。量和时间的逻辑是一致的：自定义五个程度代表的具体数值，在总结页面可以看到所有的量的总和，还可以显示本月，本周的 detail，还有历史 detail
   另一个选择：保留 progress 新增一个记录量/时间的模块，自定义数量 自定义单位
+- 给 anchor 分组
+- 把 todo list 的模型加入 record 的输入和记录
+- todo list content editable:
+  ` async function changeItem(id, event) {`
+  `    const changedValue = event.target.innerText;`
+  `   const changeItems = items.map((item, index) => {`
+  `     if (index === id) {`
+  `       return changedValue;`
+  `      } else {`
+  `        return item;`
+  `      }`
+  `    });`
+  `    setItems(changeItems);`
+  `    // 其实暂时来说这个function有没有都没影响，因为这个app都没有后台，`
+  `    // 刷新的话state都会重置，不刷新即使不更改state的信息，显示的也是更改的值`
+  `  }`
+  `suppressContentEditableWarning`
+  `contentEditable`
+  `onChange={(event) => changeItem(index, event)}`
+  /_ 这个方式可以使得 changeItem 这个 EVENT handler 能加入除 event 外的参数，
+  但也会使得每次这个组件渲染时都会创建一个新的 callback instance，
+  后期可以想一下怎么改进. freecodecamp 给的一个方案：use property
+  initializer syntax & currying， 但是实际使用会出现 error:this is
+  undefined. _/
 
 **12/31**
 
@@ -100,5 +126,10 @@ router 开始。anchors page 进行中。
 
 **3/5**
 
-- update user name, anchor, record
+- backend update username, anchor, record
 - [ ] 时间差问题：date object 是世界时间，比东八少 8h，但是 localString 只会在 string 的时候改成 local，推到 database 还是会变成 object date，然后变成世界时间
+
+**3/6**
+
+- start anchorReducer, import localforage & update TodoList
+- 复习了 useState, 因为 set local items 老是不成功，是因为 items 的更新的原因，在没有重新渲染 TodoList 的时候，items 其实还没有更新，最新值储存在 setItems 里，等到再渲染之后 items 才变成最新值，所以在 setItems 之后在渲染之前储存到本地的 items 还是旧版本的 items
