@@ -103,11 +103,11 @@ router 开始。anchors page 进行中。
 **1/13**
 
 - 把 react-calendar-heatmap 的源码学一下，ds.js 学一下，把 anchor 的每日数据可视化做出来
-- anchors 页面的两个页面要怎么做呢？
-  × 1、grid 分栏+click 显示/conditional rendering，但是缩页面以后的显示的上下栏形式 NG
-  2、anchors route 里嵌套新的 router 就好了，之前想到过的，忘了 hhh。
-  像 contact 一样，左边是 navibar 的感觉，右边 child 显示
-  但是还是会有屏幕缩进带来的显示问题
+- [ ] anchors 页面的两个页面要怎么做呢？
+      ~~1、grid 分栏+click 显示/conditional rendering，但是缩页面以后的显示的上下栏形式,所以 NG~~
+      2、anchors route 里嵌套新的 router 就好了，之前想到过的，忘了 hhh。
+      像 contact 一样，左边是 navibar 的感觉，右边 child 显示
+      但是还是会有屏幕缩进带来的显示问题
 - 不要忘记最后为了 ux，要加上 loading 状况怎么做
 
 **1/17**
@@ -116,13 +116,13 @@ router 开始。anchors page 进行中。
       在 element 指代的 rect 里是可以用 style="fill:red" 进行更改的，但是不知道怎么在 js 里完成
       试试到时候自己改造一下 api？
 - [ ] 页面缩进后需要把每个 item 的 table 居中。试试 flex 布局？
-- [ ] list 的 responsibility 也要改进，试试改成%
-- [ ] 把 keydown 改成 keyup
+- [x] list 的 responsibility 也要改进，试试改成%
+- [x] 把 keydown 改成 keyup
 
 **3/4**
 
-- [ ] 数据库：以 user 为单位，还是以 anchor 为单位，建立 anchors
-- [ ] 先不加入 client，要不然测试后端的时候会因为无法重复 set header 出问题
+- [x] 数据库：以 user 为单位，还是以 anchor 为单位，建立 anchors。anchor 单位了。
+- [x] 先不加入 client，要不然测试后端的时候会因为无法重复 set header 出问题
 
 **3/5**
 
@@ -133,3 +133,10 @@ router 开始。anchors page 进行中。
 
 - start anchorReducer, import localforage & update TodoList
 - 复习了 useState, 因为 set local items 老是不成功，是因为 items 的更新的原因，在没有重新渲染 TodoList 的时候，items 其实还没有更新，最新值储存在 setItems 里，等到再渲染之后 items 才变成最新值，所以在 setItems 之后在渲染之前储存到本地的 items 还是旧版本的 items
+- [x] solution：用 useEffect 来 set local 的值
+
+**3/7**
+
+- [ ] todoList 不够响应式，li element 会影响 block 的宽度。
+      而且 mui 的 grid 下面的那个不知道为什么不占整个 vw，而是随着 todoList 的大小改变，导致 todoList 无法居中
+      感觉还是 width/max-width/min-width 的组合问题

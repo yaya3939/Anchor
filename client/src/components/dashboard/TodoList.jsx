@@ -31,7 +31,7 @@ function TodoList() {
 
   async function handleEnter(event, inputText) {
     const enter = event.code;
-    if (enter === "Enter") {
+    if (enter === "Enter" && inputText) {
       setItems((prevItems) => {
         return [...prevItems, inputText];
       });
@@ -70,7 +70,7 @@ function TodoList() {
               <CheckCircleOutlineIcon />
             </button>
             <InputArea
-              className="itemInput"
+              className="itemInput inputBlock"
               placeholder="What you gonna do?"
               onKeyUp={handleEnter}
             />

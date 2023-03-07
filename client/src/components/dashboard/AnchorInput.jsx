@@ -46,17 +46,16 @@ export default function AnchorInput(props) {
   }
 
   return (
-    <table className="anchorItem">
+    <table className="anchorItem cloudedGlass">
       <tbody>
         <tr>
-          <td className="anchorTitle">
+          <td className="anchorLeft">
             <input
-              className="anchorTitleInput"
+              className="inputBlock titleInput text-center lead"
               placeholder="Title"
               value={anchorItem.title}
               onChange={handleTitle}
             />
-            <hr />
             <Daypicker
               changedDay={anchorItem.days}
               today={todayStart}

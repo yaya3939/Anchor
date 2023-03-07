@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   const landing = (
     <div className="centerBlock cloudedGlass">
-      <p>
+      <p className="lead">
         Please <Link to="/register">register</Link> or{" "}
         <Link to="/login">login</Link> to start your
         <br /> Anchor Life.

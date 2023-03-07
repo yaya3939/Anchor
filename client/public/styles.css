@@ -28,20 +28,7 @@ body {
   font-size: 1rem;
 }
 
-/* .mycontainer { */
-/* position: relative; */
-/*让其子元素的位置可以被设定为absolute */
-/* min-height: 100vh; */
-/* 在post占不满viewport时，也不会让footer杠在页面中间 */
-/* } */
-
 /* Text Styles*/
-.x-large {
-  font-size: 4rem;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
 .large {
   font-size: 2.7rem;
   line-height: 1.2;
@@ -49,8 +36,11 @@ body {
 }
 
 .lead {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.normal {
+  font-size: 1.2rem;
 }
 
 .text-center {
@@ -61,8 +51,17 @@ body {
   color: var(--primary-color);
 }
 
+.text-gray1 {
+  color: var(--gray1-color);
+}
+
 .text-bold {
   font-weight: bold;
+}
+
+/* margin */
+.mg-center {
+  margin: 0 auto;
 }
 
 /* Button */
@@ -95,7 +94,7 @@ body {
   color: var(--gray2-color);
 }
 
-/*  */
+/* theme */
 .darkMode {
   background-color: var(--black-color);
   /* color: var(--gray1-color); */
@@ -154,8 +153,18 @@ button {
   padding: 10px 10px;
   width: 70%;
   max-width: 500px;
-  font-size: 1.4rem;
 }
+
+.inputBlock {
+  color: var(--gray1-color);
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+}
+
+/* =======
+    component css
+   =======*/
 
 .content-container {
   padding-bottom: 100px;
@@ -196,7 +205,8 @@ button {
 .todoBlock {
   margin: 12px auto;
   width: 90%;
-  max-width: 400px;
+  max-width: 350px;
+  min-width: 310px;
 }
 
 .todoBtn {
@@ -236,28 +246,11 @@ li,
 
 .itemInput {
   width: 80%;
-  color: var(--gray1-color);
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #fff;
-}
-
-#addAnchor {
-  position: absolute;
-  display: inline-block;
-  background: black;
-  color: #fff;
-  border: none;
-  margin-left: 400px;
-  margin-bottom: 10px;
 }
 
 /* =======
    anchor
    ======= */
-
-/* .anchorTable {
-} */
 
 .anchorItem,
 .anchorRecordTable {
@@ -273,49 +266,64 @@ li,
   margin: 10px 20px;
 }
 
-.anchorTitle {
+/* anchor input */
+#addAnchor {
+  position: absolute;
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  border: none;
+  margin-left: 400px;
+  margin-bottom: 5px;
+}
+
+.titleInput {
+  width: 100px;
+  margin: 5px;
+  vertical-align: middle;
+}
+
+.blocks {
+  display: inline-block;
+}
+
+.pickers {
+  position: absolute;
+}
+
+.colorButton {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 30px;
+  vertical-align: middle;
+}
+
+/* anchor left */
+.anchorLeft {
   width: 30%;
   text-align: center;
   padding: 10px 10px;
+  word-wrap: normal;
 }
 
-.anchorTitle h1 {
-  font-size: 1.5rem;
+.anchorTitle {
   border-radius: 5px;
   width: 100px;
-  word-break: break-all;
+  word-break: break-word;
   padding-bottom: 5px;
   margin-top: 0px;
   margin-bottom: 5px;
 }
 
-.anchorTitle hr {
-  margin: 0;
+/* anchorRight */
+.dateHr {
+  width: 10%;
 }
 
-.anchorTitle p,
-.dateBar {
-  margin: 0 auto;
-}
-
-.anchorDetailInput {
-  background-color: black;
-  color: white;
-  border: none;
-  border-bottom: 1px solid #fff;
+.recordInput {
   margin-top: 5px;
-}
-
-.anchorTitleInput {
-  border: 1px solid rgba(195, 195, 195, 0.5);
-  border-radius: 5px;
-  background-color: gray;
-  color: #fff;
-  width: 100px;
-  font-size: 1.3rem;
-  text-align: center;
-  margin: 5px;
-  vertical-align: middle;
 }
 
 .anchorRecordTable {
@@ -343,23 +351,6 @@ li,
   width: 350px;
   padding-left: 13px;
   margin-top: -5px;
-}
-
-.blocks {
-  display: inline-block;
-}
-
-.colorButton {
-  width: 30px;
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-  margin: 10px 30px;
-  vertical-align: middle;
-}
-
-.pickers {
-  position: absolute;
 }
 
 #addAnchor {

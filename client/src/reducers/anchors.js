@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import { setAlert } from "./alert";
+
 //----- /
 //get all user's anchors
 export const getAnchors = createAsyncThunk(
@@ -16,6 +18,24 @@ export const getAnchors = createAsyncThunk(
 );
 
 //create a new anchor
+export const createAnchor = createAsyncThunk(
+  "anchors/createAnchor",
+  async (anchorInfo, { rejectWithValue, dispatch }) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify(anchorInfo);
+    try {
+      await axios.post("/api/anchors", body, config);
+      await dispatch(getAnchors());
+      dispatch(setAlert("New anchor added", "succedd"));
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //add record to anchor
 
@@ -42,7 +62,7 @@ const anchorSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getAnchors.fulfilled, (state, action) => {
-        state.anchors.push(action.payload);
+        state.anchors = action.payload;
         state.loading = false;
       })
       .addCase(getAnchors.rejected, (state, action) => {

@@ -46,7 +46,7 @@ export default function Progress(props) {
         }}
         icon={<RectangleIcon fontSize="inherit" />}
         emptyIcon={
-          <RectangleOutlinedIcon fontSize="inherit" sx={{ color: grey[800] }} />
+          <RectangleOutlinedIcon fontSize="inherit" sx={{ color: grey[400] }} />
         }
       />
       {value !== null && (

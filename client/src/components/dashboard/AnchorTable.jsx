@@ -1,8 +1,36 @@
-import React, { useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import AnchorItem from "./AnchorItem";
 import AnchorInput from "./AnchorInput";
+import Spinner from "../layout/Spinner";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getAnchors } from "../../reducers/anchors";
 
 function AnchorTable() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAnchors());
+  }, [dispatch]);
+
+  const { anchors, loading } = useSelector((state) => state.anchors);
+  const today = new Date();
+  let pastAnchors = [];
+  let futureAnchors = [];
+  let nowAnchors = [];
+
+  if (anchors.length > 0) {
+    pastAnchors = anchors.filter(
+      (anchor) => anchor.to && new Date(anchor.to).getTime() < today.getTime()
+    );
+    futureAnchors = anchors.filter(
+      (anchor) => new Date(anchor.from).getTime() > today.getTime()
+    );
+    nowAnchors = anchors.filter(
+      (anchor) =>
+        !pastAnchors.includes(anchor) && !futureAnchors.includes(anchor)
+    );
+  }
+
   //-------------------------- anchorItems store --------------------------
   const [anchorItems, setAnchorItems] = useState([
     {
@@ -27,29 +55,21 @@ function AnchorTable() {
     }
   }
 
-  return (
-    <div className="anchorTable">
+  return loading ? (
+    <Spinner />
+  ) : (
+    <Fragment>
       {/*  ------------------------input part--------------------------*/}
       <AnchorInput addAnchor={addAnchor} />
 
       {/*------------------------- anchorItem list -------------------------------*/}
-      {anchorItems.map((item) => {
-        return (
-          <AnchorItem
-            backgroundColor={{
-              backgroundColor: `rgb(${item.color.r}, ${item.color.g}, ${item.color.b})`,
-            }}
-            ratingcolor={{
-              "& .MuiRating-iconFilled": {
-                color: `rgb(${item.color.r}, ${item.color.g}, ${item.color.b})`,
-              },
-            }}
-            title={item.title}
-            days={item.days}
-          />
-        );
-      })}
-    </div>
+      {nowAnchors.map((anchor) => (
+        <AnchorItem key={anchor._id} anchor={anchor} className="cloudedGlass" />
+      ))}
+      {futureAnchors.map((anchor) => (
+        <AnchorItem key={anchor._id} anchor={anchor} isNow={false} />
+      ))}
+    </Fragment>
   );
 }
 

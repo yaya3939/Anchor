@@ -10,14 +10,18 @@ export default function Daypicker(props) {
 
   return (
     <div className="blocks">
-      <div className="dateBar" onClick={dateDisplay}>
+      <div className="mg-center" onClick={dateDisplay}>
         {props.changedDay}
       </div>
       {dateDisplayed && (
         <DayPicker
           captionLayout="dropdown" /* 没用 不知道为啥 */
           styles={{
-            root: { backgroundColor: "gray", position: "absolute" },
+            root: {
+              backgroundColor: "gray",
+              position: "absolute",
+              zIndex: "99",
+            },
           }}
           mode="range"
           defaultMonth={props.today}
