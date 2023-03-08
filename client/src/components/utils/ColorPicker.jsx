@@ -11,11 +11,15 @@ export default function ColorPicker(props) {
     <div className="blocks">
       <button
         className="colorButton"
-        style={props.backgroundColor}
+        style={props.style}
         onClick={colorDisplay}
       ></button>
       {colorDisplayed && (
-        <div className="pickers" onClick={colorDisplay}>
+        <div
+          className="pickers"
+          style={{ zIndex: "99" }}
+          onClick={colorDisplay}
+        >
           <CompactPicker
             color={props.color}
             onChangeComplete={props.colorChange}

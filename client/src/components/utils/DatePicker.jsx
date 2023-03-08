@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import "react-day-picker/dist/style.css";
 import { DayPicker } from "react-day-picker";
 
+export function getDays(from, to) {
+  const diffDays = Math.round(
+    Math.abs(
+      (new Date(to).getTime() - new Date(from).getTime()) /
+        (24 * 60 * 60 * 1000)
+    )
+  );
+  const anchorDays = diffDays + 1;
+  return anchorDays;
+}
+
 export default function Daypicker(props) {
   const [dateDisplayed, setDateDisplayed] = useState(false);
   function dateDisplay() {
@@ -10,7 +21,7 @@ export default function Daypicker(props) {
 
   return (
     <div className="blocks">
-      <div className="mg-center" onClick={dateDisplay}>
+      <div className="mg-center pointer" onClick={dateDisplay}>
         {props.changedDay}
       </div>
       {dateDisplayed && (

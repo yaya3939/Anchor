@@ -80,6 +80,12 @@ body {
   box-shadow: 0px 0px 10px var(--primary-color);
 }
 
+.addBox {
+  background: transparent;
+  color: #fff;
+  border: none;
+}
+
 .invisible {
   visibility: hidden;
 }
@@ -92,6 +98,10 @@ body {
 .unactive {
   text-decoration: none;
   color: var(--gray2-color);
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 /* theme */
@@ -252,14 +262,27 @@ li,
    anchor
    ======= */
 
+.anchorList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.anchorList::after {
+  width: 300px;
+  margin: 10px 20px;
+  content: "";
+}
+
 .anchorItem,
 .anchorRecordTable {
   display: inline-block;
-  border-collapse: separate;
   /* 如果我们直接对table设置border-radius是不会生效的，
    因为table的默认属性border-collapse值为collapse。
    border-collapse:collapse和border-radius不兼容。
    因此，我们需要将border-collapse的值设置为separate即可。 */
+  border-collapse: separate;
   border: 3px solid rgba(195, 195, 195, 0.5);
   border-radius: 10px;
   width: 300px;
@@ -267,14 +290,9 @@ li,
 }
 
 /* anchor input */
-#addAnchor {
-  position: absolute;
-  display: inline-block;
-  background: transparent;
-  color: #fff;
-  border: none;
-  margin-left: 400px;
-  margin-bottom: 5px;
+.addAnchor {
+  margin-right: 10px;
+  margin-top: 5px;
 }
 
 .titleInput {
@@ -318,12 +336,36 @@ li,
 }
 
 /* anchorRight */
-.dateHr {
-  width: 10%;
+.anchorRight {
+  padding-left: 5px;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.progress {
+  padding-top: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 
 .recordInput {
-  margin-top: 5px;
+  background-color: var(--gray2-color);
+  border: none;
+  font-size: 1rem;
+  resize: none;
+  outline: none;
+  height: auto;
+}
+
+.done {
+  position: absolute;
+  top: 30%;
+  margin: 0 10px;
+}
+
+.dateHr {
+  width: 10%;
 }
 
 .anchorRecordTable {
@@ -351,9 +393,4 @@ li,
   width: 350px;
   padding-left: 13px;
   margin-top: -5px;
-}
-
-#addAnchor {
-  position: unset;
-  margin: 10px 30px 10px 0;
 }

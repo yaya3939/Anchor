@@ -1,12 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { setAlert } from "./alert";
-
 //----- /
 //get all user's anchors
 export const getAnchors = createAsyncThunk(
-  "anchors/getAnchors",
+  "anchors/getAllAnchor",
   async (arg, { rejectWithValue }) => {
     try {
       const res = await axios.get("/api/anchors");
@@ -30,7 +28,6 @@ export const createAnchor = createAsyncThunk(
     try {
       await axios.post("/api/anchors", body, config);
       await dispatch(getAnchors());
-      dispatch(setAlert("New anchor added", "succedd"));
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
@@ -38,6 +35,23 @@ export const createAnchor = createAsyncThunk(
 );
 
 //add record to anchor
+export const addRecord = createAsyncThunk(
+  "anchors/addRecordForAnchor",
+  async ({ record, anchorId }, { rejectWithValue, dispatch }) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify(record);
+    try {
+      await axios.put(`/api/anchors/record/${anchorId}`, body, config);
+      await dispatch(getAnchors());
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //---- /anchors
 //get anchor by anchorId
@@ -65,10 +79,13 @@ const anchorSlice = createSlice({
         state.anchors = action.payload;
         state.loading = false;
       })
-      .addCase(getAnchors.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+      .addMatcher(
+        (action) => action.type.endsWith("Anchor/rejected"),
+        (state, action) => {
+          state.loading = false;
+          state.error = action.payload;
+        }
+      );
   },
 });
 

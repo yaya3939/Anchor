@@ -1,21 +1,4 @@
-**待解决**
-
-- 需要的 array2：
-  在 anchor list 里显示的，anchorDetails：记录每日进度（包含颜色），每日具体情况。
-  A、直接并进 anchorItem 里，多加两个 key，progress&comment、类型 array，然后在 anchor 页面按照索引一一对应显示
-  B、新建一个每个 anchor 的 db，每天的 progress 和 comment 在一个 object 里储存
-- 怎么根据日期显示 anchor：
-  if (from=to){return all}
-  else(from!==to){
-  if(current<=to){
-  return all
-  }else{
-  return !==item
-  }
-  }
-  这个似乎是需要数据库才能完成的事项，先拖着吧
-
-  **可能性**
+**可能性**
 
 - progress 可以提供三个选择：量，时间，评分
   评分最简单，五星制，即现有程序。量和时间的逻辑是一致的：自定义五个程度代表的具体数值，在总结页面可以看到所有的量的总和，还可以显示本月，本周的 detail，还有历史 detail
@@ -44,6 +27,10 @@
   后期可以想一下怎么改进. freecodecamp 给的一个方案：use property
   initializer syntax & currying， 但是实际使用会出现 error:this is
   undefined. _/
+
+  **DONE**
+
+  - [x] 完成的 anchor 自动排序到未完成的下面
 
 **12/31**
 
@@ -140,3 +127,11 @@ router 开始。anchors page 进行中。
 - [ ] todoList 不够响应式，li element 会影响 block 的宽度。
       而且 mui 的 grid 下面的那个不知道为什么不占整个 vw，而是随着 todoList 的大小改变，导致 todoList 无法居中
       感觉还是 width/max-width/min-width 的组合问题
+
+**3/8**
+
+- 复习了 array.filter&array.some&array.find。
+  filter：callback 需要给 boolean 结果，输出值为 array，所以不能 filter 套 filter；
+  find：返回满足条件的第一个值，或者 undefine
+  some：返回 boolean
+  这些函数里面的参数一样是可以 deconstruction 的

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import AnchorTable from "./AnchorTable";
+import AnchorList from "./AnchorList";
 import TodoList from "./TodoList";
 import Spinner from "../layout/Spinner";
 
@@ -23,11 +23,11 @@ export default function Dashboard() {
 
   const dashboard = (
     <Grid container spacing={1}>
-      <Grid item sm={6} md={7}>
-        <AnchorTable />
-      </Grid>
       <Grid item sm={6} md={5}>
         <TodoList />
+      </Grid>
+      <Grid item sm={6} md={7}>
+        <AnchorList />
       </Grid>
     </Grid>
   );

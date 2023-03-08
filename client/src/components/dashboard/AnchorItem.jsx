@@ -1,27 +1,20 @@
 import React, { Fragment } from "react";
-import Progress from "../utils/Progress";
-import InputArea from "../utils/InputArea";
 import PropTypes from "prop-types";
 import moment from "moment";
 
-function getDays(from, to) {
-  const diffDays = Math.round(
-    Math.abs(
-      (new Date(to).getTime() - new Date(from).getTime()) /
-        (24 * 60 * 60 * 1000)
-    )
-  );
-  const anchorDays = diffDays + 1;
-  return anchorDays;
-}
+import RecordForm from "./RecordForm";
+import { getDays } from "../utils/DatePicker";
 
 export default function AnchorItem({
-  anchor: { title, color, from, to },
+  anchor: { title, color, from, to, _id, records },
   isNow,
+  undone,
   className,
 }) {
   const today = new Date();
-  const days = getDays(today, to);
+  const daysForNow = getDays(today, to);
+  const daysForFuture = getDays(from, to);
+
   return (
     <table className={`anchorItem ${className}`}>
       <tbody>
@@ -34,24 +27,25 @@ export default function AnchorItem({
               {title}
             </h1>
             <hr />
-            <p className="mg-center">{isNaN(days) ? "Everyday" : days}</p>
+            <p className="mg-center">
+              {isNow
+                ? isNaN(daysForNow)
+                  ? "Everyday"
+                  : daysForNow
+                : isNaN(daysForFuture)
+                ? "Everyday"
+                : daysForFuture}
+            </p>
           </td>
-          <td>
+          <td className="anchorRight">
             {isNow ? (
-              <Fragment>
-                {" "}
-                <Progress
-                  ratingcolor={{
-                    "& .MuiRating-iconFilled": {
-                      color: `${color}`,
-                    },
-                  }}
-                />
-                <InputArea
-                  className="inputBlock recordInput"
-                  placeholder="How's your day"
-                />
-              </Fragment>
+              undone ? (
+                <RecordForm color={color} anchorId={_id} />
+              ) : (
+                <p className="normal text-bold text-center text-gray1 done">
+                  DONE it! ^^
+                </p>
+              )
             ) : (
               <Fragment>
                 <p className="normal text-bold text-center text-gray1">
@@ -73,6 +67,7 @@ export default function AnchorItem({
 
 AnchorItem.defaultProps = {
   isNow: true,
+  undone: true,
 };
 
 AnchorItem.propTypes = {
