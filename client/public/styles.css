@@ -80,9 +80,9 @@ body {
   box-shadow: 0px 0px 10px var(--primary-color);
 }
 
-.addBox {
+.transparent {
   background: transparent;
-  color: #fff;
+  color: var(--gray1-color);
   border: none;
 }
 

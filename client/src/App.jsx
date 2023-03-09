@@ -10,7 +10,7 @@ import { Register } from "./components/auth/Register";
 import { Login } from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import { loader as todoLoader } from "./components/dashboard/TodoList";
-import Anchors from "./components/anchors/anchors";
+import { Anchors } from "./components/anchors/Anchors";
 
 import { useSelector, useDispatch } from "react-redux";
 import { loadUser } from "./reducers/auth";

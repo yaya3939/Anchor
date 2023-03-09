@@ -13,24 +13,9 @@ function AnchorList() {
     dispatch(getAnchors());
   }, [dispatch]);
 
-  const { anchors, loading } = useSelector((state) => state.anchors);
-  const today = new Date();
-  let pastAnchors = [];
-  let futureAnchors = [];
-  let nowAnchors = [];
-
-  if (anchors.length > 0) {
-    pastAnchors = anchors.filter(
-      (anchor) => anchor.to && new Date(anchor.to).getTime() < today.getTime()
-    );
-    futureAnchors = anchors.filter(
-      (anchor) => new Date(anchor.from).getTime() > today.getTime()
-    );
-    nowAnchors = anchors.filter(
-      (anchor) =>
-        !pastAnchors.includes(anchor) && !futureAnchors.includes(anchor)
-    );
-  }
+  const { futureAnchors, nowAnchors, loading } = useSelector(
+    (state) => state.anchors
+  );
 
   const doneAnchors = nowAnchors.filter((anchor) => {
     let done = anchor.records.some(
@@ -45,8 +30,6 @@ function AnchorList() {
   const todoAnchor = nowAnchors.filter(
     (anchor) => !doneAnchors.includes(anchor)
   );
-
-  console.log(doneAnchors, todoAnchor);
 
   return loading ? (
     <Spinner />

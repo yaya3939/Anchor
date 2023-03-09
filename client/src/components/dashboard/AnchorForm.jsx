@@ -88,7 +88,7 @@ export default function AnchorForm() {
           </td>
           <td>
             <button
-              className="addBox addAnchor"
+              className="transparent addAnchor"
               onClick={() => {
                 handleSubmit();
                 setAnchorInfo({

@@ -8,7 +8,25 @@ export const getAnchors = createAsyncThunk(
   async (arg, { rejectWithValue }) => {
     try {
       const res = await axios.get("/api/anchors");
-      return res.data;
+      const anchors = res.data;
+      const today = new Date();
+      let pastAnchors = [];
+      let futureAnchors = [];
+      let nowAnchors = [];
+      if (anchors.length > 0) {
+        pastAnchors = anchors.filter(
+          (anchor) =>
+            anchor.to && new Date(anchor.to).getTime() < today.getTime()
+        );
+        futureAnchors = anchors.filter(
+          (anchor) => new Date(anchor.from).getTime() > today.getTime()
+        );
+        nowAnchors = anchors.filter(
+          (anchor) =>
+            !pastAnchors.includes(anchor) && !futureAnchors.includes(anchor)
+        );
+      }
+      return { anchors, pastAnchors, futureAnchors, nowAnchors };
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
@@ -30,6 +48,21 @@ export const createAnchor = createAsyncThunk(
       await dispatch(getAnchors());
     } catch (err) {
       return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+//delete anchor
+export const deleteAnchor = createAsyncThunk(
+  "anchors/deleteAnchor",
+  async (anchorId, { rejectWithValue, dispatch }) => {
+    if (window.confirm("You're deleting this anchor!")) {
+      try {
+        await axios.delete(`/api/anchors/${anchorId}`);
+        await dispatch(getAnchors());
+      } catch (err) {
+        return rejectWithValue(err.response.data);
+      }
     }
   }
 );
@@ -62,13 +95,14 @@ export const addRecord = createAsyncThunk(
 
 //delete record
 
-//delete anchor
-
 const anchorSlice = createSlice({
   name: "anchors",
   initialState: {
     anchor: {},
     anchors: [],
+    pastAnchors: [],
+    futureAnchors: [],
+    nowAnchors: [],
     loading: true,
     error: null,
   },
@@ -76,8 +110,14 @@ const anchorSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getAnchors.fulfilled, (state, action) => {
-        state.anchors = action.payload;
-        state.loading = false;
+        return {
+          ...state,
+          anchors: action.payload.anchors,
+          pastAnchors: action.payload.pastAnchors,
+          futureAnchors: action.payload.futureAnchors,
+          nowAnchors: action.payload.nowAnchors,
+          loading: false,
+        };
       })
       .addMatcher(
         (action) => action.type.endsWith("Anchor/rejected"),

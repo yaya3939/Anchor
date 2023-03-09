@@ -1,12 +1,16 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import RecordForm from "./RecordForm";
 import { getDays } from "../utils/DatePicker";
 
+import { useDispatch } from "react-redux";
+import { deleteAnchor } from "../../reducers/anchors";
+
 export default function AnchorItem({
-  anchor: { title, color, from, to, _id, records },
+  anchor: { title, color, from, to, _id },
   isNow,
   undone,
   className,
@@ -14,6 +18,15 @@ export default function AnchorItem({
   const today = new Date();
   const daysForNow = getDays(today, to);
   const daysForFuture = getDays(from, to);
+
+  const dispatch = useDispatch();
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteAnchor(_id)).unwrap();
+    } catch (err) {
+      console.log(err.errors);
+    }
+  };
 
   return (
     <table className={`anchorItem ${className}`}>
@@ -59,6 +72,13 @@ export default function AnchorItem({
               </Fragment>
             )}
           </td>
+          {!isNow && (
+            <td>
+              <button className="transparent pointer" onClick={handleDelete}>
+                <DeleteIcon />
+              </button>
+            </td>
+          )}
         </tr>
       </tbody>
     </table>

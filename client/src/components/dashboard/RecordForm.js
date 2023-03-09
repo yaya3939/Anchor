@@ -50,14 +50,14 @@ const RecordForm = ({ color, anchorId }) => {
           rate={rate}
           handleRate={handleRate}
         />
-        <button className="addBox pointer" onClick={handleSubmit}>
+        <button className="transparent pointer" onClick={handleSubmit}>
           <AddBox />
         </button>
       </div>
       <textarea
         className="recordInput"
         placeholder="How's your day"
-        cols={17}
+        cols={15}
         rows={4}
         value={text}
         onChange={handleChange}
@@ -68,6 +68,7 @@ const RecordForm = ({ color, anchorId }) => {
 
 RecordForm.propTypes = {
   color: PropTypes.string.isRequired,
+  anchorId: PropTypes.string.isRequired,
 };
 
 export default RecordForm;
