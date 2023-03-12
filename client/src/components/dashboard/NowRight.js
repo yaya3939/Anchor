@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { addRecord } from "../../reducers/anchors";
 import { setAlert } from "../../reducers/alert";
 
-const RecordForm = ({ color, anchorId }) => {
+const NowRight = ({ anchor: { color, _id }, isDone }) => {
   const [record, setRecord] = useState({ rate: 0, text: "" });
   const { rate, text } = record;
 
@@ -30,6 +30,7 @@ const RecordForm = ({ color, anchorId }) => {
   };
 
   const handleSubmit = async () => {
+    const anchorId = String(_id);
     try {
       await dispatch(addRecord({ record, anchorId })).unwrap();
     } catch (err) {
@@ -38,7 +39,9 @@ const RecordForm = ({ color, anchorId }) => {
     }
   };
 
-  return (
+  return isDone ? (
+    <p className="normal text-bold text-center text-gray1 done">DONE it! ^^</p>
+  ) : (
     <Fragment>
       <div className="progress">
         <Progress
@@ -66,9 +69,12 @@ const RecordForm = ({ color, anchorId }) => {
   );
 };
 
-RecordForm.propTypes = {
-  color: PropTypes.string.isRequired,
-  anchorId: PropTypes.string.isRequired,
+NowRight.defaultProps = {
+  isDone: false,
 };
 
-export default RecordForm;
+NowRight.propTypes = {
+  anchor: PropTypes.object.isRequired,
+};
+
+export default NowRight;

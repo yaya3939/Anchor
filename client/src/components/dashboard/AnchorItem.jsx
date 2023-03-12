@@ -1,28 +1,22 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-import RecordForm from "./RecordForm";
+import { useNavigate } from "react-router-dom";
 import { getDays } from "../utils/DatePicker";
 
 import { useDispatch } from "react-redux";
 import { deleteAnchor } from "../../reducers/anchors";
 
-export default function AnchorItem({
-  anchor: { title, color, from, to, _id },
-  isNow,
-  undone,
-  className,
-}) {
+export default function AnchorItem({ anchor, isNow, className, children }) {
+  const navigate = useNavigate();
   const today = new Date();
-  const daysForNow = getDays(today, to);
-  const daysForFuture = getDays(from, to);
+  const daysCount = getDays(today, anchor.to);
+  const daysAll = getDays(anchor.from, anchor.to);
 
   const dispatch = useDispatch();
   const handleDelete = async () => {
     try {
-      await dispatch(deleteAnchor(_id)).unwrap();
+      await dispatch(deleteAnchor(anchor._id)).unwrap();
     } catch (err) {
       console.log(err.errors);
     }
@@ -34,43 +28,28 @@ export default function AnchorItem({
         <tr>
           <td className="anchorLeft">
             <h1
-              className="lead anchorTitle"
-              style={{ backgroundColor: `${color}` }}
+              className="lead anchorTitle pointer"
+              style={{ backgroundColor: `${anchor.color}` }}
+              onClick={() => navigate(`/anchors/${anchor._id}`)}
             >
-              {title}
+              {anchor.title}
             </h1>
             <hr />
             <p className="mg-center">
               {isNow
-                ? isNaN(daysForNow)
+                ? isNaN(daysCount)
                   ? "Everyday"
-                  : daysForNow
-                : isNaN(daysForFuture)
+                  : daysCount
+                : isNaN(daysAll)
                 ? "Everyday"
-                : daysForFuture}
+                : daysAll}
             </p>
           </td>
-          <td className="anchorRight">
-            {isNow ? (
-              undone ? (
-                <RecordForm color={color} anchorId={_id} />
-              ) : (
-                <p className="normal text-bold text-center text-gray1 done">
-                  DONE it! ^^
-                </p>
-              )
-            ) : (
-              <Fragment>
-                <p className="normal text-bold text-center text-gray1">
-                  {moment(from).format("YYYY/MM/DD")}
-                </p>
-                <hr className="dateHr" />
-                <p className="normal text-bold text-center text-gray1">
-                  {" "}
-                  {moment(to).format("YYYY/MM/DD")}
-                </p>
-              </Fragment>
-            )}
+          <td
+            className="anchorRight"
+            id={`Cal${anchor.title.split(" ").join("")}`}
+          >
+            {children(anchor)}
           </td>
           {!isNow && (
             <td>
@@ -87,9 +66,9 @@ export default function AnchorItem({
 
 AnchorItem.defaultProps = {
   isNow: true,
-  undone: true,
 };
 
 AnchorItem.propTypes = {
   anchor: PropTypes.object.isRequired,
+  children: PropTypes.func.isRequired,
 };

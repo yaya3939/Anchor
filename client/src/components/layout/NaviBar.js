@@ -40,14 +40,14 @@ function NaviBar() {
             <AnchorIcon />
           </NavLink>
         )}
-        {authenticated && !loading && (
+        {/* {authenticated && !loading && (
           <NavLink
             to="/calender"
             className={({ isActive }) => (isActive ? "active" : "unactive")}
           >
             <CalendarMonthIcon />
           </NavLink>
-        )}
+        )} */}
         {authenticated && !loading && (
           <NavLink
             to="/"

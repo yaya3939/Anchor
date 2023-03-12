@@ -56,7 +56,9 @@ export const createAnchor = createAsyncThunk(
 export const deleteAnchor = createAsyncThunk(
   "anchors/deleteAnchor",
   async (anchorId, { rejectWithValue, dispatch }) => {
-    if (window.confirm("You're deleting this anchor!")) {
+    if (
+      window.confirm("You're deleting this anchor! This can NOT be undone!")
+    ) {
       try {
         await axios.delete(`/api/anchors/${anchorId}`);
         await dispatch(getAnchors());
@@ -86,19 +88,85 @@ export const addRecord = createAsyncThunk(
   }
 );
 
-//---- /anchors
+//---- /anchors/:id
 //get anchor by anchorId
+export const getAnchorById = createAsyncThunk(
+  "anchors/getIdAnchor",
+  async (anchorId, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`/api/anchors/${anchorId}`);
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //update anchor info
+export const updateAnchor = createAsyncThunk(
+  "anchors/updateAnchor",
+  async ({ anchorInfo, anchorId }, { rejectWithValue, dispatch }) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify(anchorInfo);
+    try {
+      await axios.put(`/api/anchors/record/${anchorId}`, body, config);
+      await dispatch(getAnchorById(anchorId));
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //update record text
+export const updateRecord = createAsyncThunk(
+  "anchors/updateRecord",
+  async ({ text, anchorId, recordId }, { rejectWithValue, dispatch }) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      await axios.put(
+        `/api/anchors/record/${anchorId}/${recordId}`,
+        text,
+        config
+      );
+      await dispatch(getAnchorById(anchorId));
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //delete record
+export const deleteRecord = createAsyncThunk(
+  "anchors/deleteRecord",
+  async ({ anchorId, recordId }, { rejectWithValue, dispatch }) => {
+    if (
+      window.confirm(
+        "You're deleting today's record. You can add a new record for today later."
+      )
+    ) {
+      try {
+        await axios.delete(`/api/anchors/record/${anchorId}/${recordId}`);
+        await dispatch(getAnchorById(anchorId));
+        await dispatch(getAnchors());
+      } catch (err) {
+        return rejectWithValue(err.response.data);
+      }
+    }
+  }
+);
 
 const anchorSlice = createSlice({
   name: "anchors",
   initialState: {
-    anchor: {},
+    anchor: null,
     anchors: [],
     pastAnchors: [],
     futureAnchors: [],
@@ -116,6 +184,13 @@ const anchorSlice = createSlice({
           pastAnchors: action.payload.pastAnchors,
           futureAnchors: action.payload.futureAnchors,
           nowAnchors: action.payload.nowAnchors,
+          loading: false,
+        };
+      })
+      .addCase(getAnchorById.fulfilled, (state, action) => {
+        return {
+          ...state,
+          anchor: action.payload,
           loading: false,
         };
       })

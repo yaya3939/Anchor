@@ -22,8 +22,8 @@ export default function Dashboard() {
   );
 
   const dashboard = (
-    <Grid container spacing={1}>
-      <Grid item sm={6} md={5}>
+    <Grid container spacing={5}>
+      <Grid item sm={6} md={4}>
         <TodoList />
       </Grid>
       <Grid item sm={6} md={7}>

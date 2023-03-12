@@ -1,18 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import moment from "moment";
 import AnchorItem from "./AnchorItem";
 import AnchorForm from "./AnchorForm";
+import FutureRight from "./FutureRight";
+import NowRight from "./NowRight";
 import Spinner from "../layout/Spinner";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getAnchors } from "../../reducers/anchors";
+import { useSelector } from "react-redux";
 
 function AnchorList() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAnchors());
-  }, [dispatch]);
-
   const { futureAnchors, nowAnchors, loading } = useSelector(
     (state) => state.anchors
   );
@@ -40,18 +36,29 @@ function AnchorList() {
 
       {/*------------------------- anchors list -------------------------------*/}
       {todoAnchor.map((anchor) => (
-        <AnchorItem key={anchor._id} anchor={anchor} className="cloudedGlass" />
+        <AnchorItem
+          key={anchor._id}
+          anchor={anchor}
+          className="cloudedGlass"
+          children={(anchor) => <NowRight anchor={anchor} />}
+        />
       ))}
       {doneAnchors.map((anchor) => (
         <AnchorItem
           key={anchor._id}
           anchor={anchor}
           className="cloudedGlass"
-          undone={false}
+          children={(anchor) => <NowRight anchor={anchor} isDone={true} />}
         />
       ))}
       {futureAnchors.map((anchor) => (
-        <AnchorItem key={anchor._id} anchor={anchor} isNow={false} />
+        <AnchorItem
+          key={anchor._id}
+          anchor={anchor}
+          isNow={false}
+          isDone={false}
+          children={(anchor) => <FutureRight anchor={anchor} />}
+        />
       ))}
     </div>
   );

@@ -48,7 +48,7 @@ function TodoList() {
 
   return (
     <div className="cloudedGlass todoBlock">
-      <ol>
+      <ol className="todoList">
         {items.map((item, index) => {
           return (
             <li key={index}>

@@ -11,9 +11,13 @@ import { Login } from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import { loader as todoLoader } from "./components/dashboard/TodoList";
 import { Anchors } from "./components/anchors/Anchors";
+import Anchor from "./components/anchor/Anchor";
 
 import { useSelector, useDispatch } from "react-redux";
 import { loadUser } from "./reducers/auth";
+import { getAnchors } from "./reducers/anchors";
+
+import "./Styles.css";
 
 const darkTheme = createTheme({
   palette: {
@@ -39,7 +43,10 @@ function SetAlert() {
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadUser());
+    (async function () {
+      await dispatch(loadUser()).unwrap();
+      dispatch(getAnchors());
+    })();
   }, [dispatch]);
 
   return (
@@ -66,6 +73,7 @@ export default createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
       { path: "/anchors", element: <Anchors /> },
+      { path: "/anchors/:id", element: <Anchor /> },
     ],
   },
 ]);

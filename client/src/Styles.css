@@ -47,12 +47,28 @@ body {
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .text-primary {
   color: var(--primary-color);
 }
 
 .text-gray1 {
   color: var(--gray1-color);
+}
+
+.text-gray2 {
+  color: var(--gray2-color);
+}
+
+.text-gray3 {
+  color: var(--gray3-color);
+}
+
+.text-gray4 {
+  color: var(--gray4-color);
 }
 
 .text-bold {
@@ -62,6 +78,16 @@ body {
 /* margin */
 .mg-center {
   margin: 0 auto;
+}
+
+/* padding */
+.pd-horizon {
+  padding: 0 10px;
+}
+
+/* display */
+.block {
+  display: block;
 }
 
 /* Button */
@@ -224,12 +250,12 @@ button {
   margin-bottom: 20px;
 }
 
-ol {
+.todoList {
   margin: 10px 10px 10px 0;
   padding: inherit;
 }
 
-li,
+.todoList li,
 .itemInput {
   font-size: 1.2rem;
   padding: 1.5px 0;
@@ -368,29 +394,49 @@ li,
   width: 10%;
 }
 
-.anchorRecordTable {
-  width: 250px;
+/* anchors page */
+.pastAnchorLink {
+  text-decoration: none;
+  color: var(--primary-color);
 }
 
-.anchorRecordTable .anchorTitle {
-  margin: 0 auto;
-  width: unset;
-  padding-bottom: 0;
+/* anchor page */
+.recordsBlock {
+  width: 85%;
+  max-width: 450px;
+  padding: 20px 10px 10px 0;
+  margin-bottom: 20px;
 }
 
-.anchorRecordTable .anchorTitle h1 {
-  display: inline-block;
-  width: unset;
+.recordBlock {
+  display: flex;
+  padding: 5px 0 5px 10%;
+  word-break: break-word;
 }
 
-.anchorRecordTable .anchorTitle p {
-  display: inline-block;
-  padding-left: 7px;
+.layout {
+  height: auto;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.monthHeatmap {
-  margin: 0 auto;
-  width: 350px;
-  padding-left: 13px;
-  margin-top: -5px;
+.recordDot {
+  width: 15px;
+  height: 15px;
+  border: none;
+  border-radius: 50%;
+}
+
+.line {
+  width: 3px;
+  height: 70%;
+  border: none;
+  margin: 5px auto;
+}
+
+.deleteRecord {
+  background-color: transparent;
+  border: none;
 }
