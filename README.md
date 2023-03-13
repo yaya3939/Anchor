@@ -58,7 +58,7 @@
         或者是  `Object.entries(object1).toString() === Object.entries(object2).toString();` （es6）。
         不一样的只能历遍内容来比较了。
   - [x] (1/4) component tree 做好
-  - [ ] 试着把一些 props 改成 render props
+  - [x] 试着把一些 props 改成 render props
   - [x] react-router，组建 anchor 页面
 
 **1/10**
@@ -79,7 +79,7 @@ router 开始。anchors page 进行中。
   item：id，name，range，
 - 每个 anchor item 的详细页面。/anchors/:anchorId
   - [ ] 一个颜色显示区域：限制长宽，超出部分内部滑动。最后有一个每个等级有多少天的总结
-  - [ ] 一个每日记录显示区域：日期+内容。参考 ui：事线
+  - [x] 一个每日记录显示区域：日期+内容。参考 ui：事线
 
 **1/12**
 
@@ -90,19 +90,21 @@ router 开始。anchors page 进行中。
 **1/13**
 
 - 把 react-calendar-heatmap 的源码学一下，ds.js 学一下，把 anchor 的每日数据可视化做出来
-- [ ] anchors 页面的两个页面要怎么做呢？
+- [x] anchors 页面的两个页面要怎么做呢？
       ~~1、grid 分栏+click 显示/conditional rendering，但是缩页面以后的显示的上下栏形式,所以 NG~~
       2、anchors route 里嵌套新的 router 就好了，之前想到过的，忘了 hhh。
       像 contact 一样，左边是 navibar 的感觉，右边 child 显示
       但是还是会有屏幕缩进带来的显示问题
-- 不要忘记最后为了 ux，要加上 loading 状况怎么做
+      直接建了新的页面
+- [x] 不要忘记最后为了 ux，要加上 loading 状况怎么做
 
 **1/17**
 
-- [ ] 用 api 把 anchors 页面做了，还剩 records 的颜色问题。
+- [x] 用 api 把 anchors 页面做了，还剩 records 的颜色问题。
       在 element 指代的 rect 里是可以用 style="fill:red" 进行更改的，但是不知道怎么在 js 里完成
       试试到时候自己改造一下 api？
-- [ ] 页面缩进后需要把每个 item 的 table 居中。试试 flex 布局？
+      试了两个 api 都无法满足需求，打算自己做了
+- [x] 页面缩进后需要把每个 item 的 table 居中。试试 flex 布局？
 - [x] list 的 responsibility 也要改进，试试改成%
 - [x] 把 keydown 改成 keyup
 
@@ -114,7 +116,8 @@ router 开始。anchors page 进行中。
 **3/5**
 
 - backend update username, anchor, record
-- [ ] 时间差问题：date object 是世界时间，比东八少 8h，但是 localString 只会在 string 的时候改成 local，推到 database 还是会变成 object date，然后变成世界时间
+- [x] 时间差问题：date object 是世界时间，比东八少 8h，但是 localString 只会在 string 的时候改成 local，推到 database 还是会变成 object date，然后变成世界时间.
+      浏览器自动转换
 
 **3/6**
 
@@ -135,3 +138,10 @@ router 开始。anchors page 进行中。
   find：返回满足条件的第一个值，或者 undefine
   some：返回 boolean
   这些函数里面的参数一样是可以 deconstruction 的
+
+**3/13**
+
+- [ ] 把 dashboard 的 anchor table 和 anchor page 的 record block 都从 flex 布局改成 grid。
+- [x] update anchorInfo
+- [ ] update record text
+- [ ] 看情况，把 createAsyncThunk 改成 RTK query

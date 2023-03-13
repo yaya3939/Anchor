@@ -15,11 +15,7 @@ export default function ColorPicker(props) {
         onClick={colorDisplay}
       ></button>
       {colorDisplayed && (
-        <div
-          className="pickers"
-          style={{ zIndex: "99" }}
-          onClick={colorDisplay}
-        >
+        <div className="pickers" style={{ zIndex: "99" }}>
           <CompactPicker
             color={props.color}
             onChangeComplete={props.colorChange}

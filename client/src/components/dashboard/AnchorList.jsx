@@ -6,7 +6,9 @@ import FutureRight from "./FutureRight";
 import NowRight from "./NowRight";
 import Spinner from "../layout/Spinner";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createAnchor } from "../../reducers/anchors";
+import { setAlert } from "../../reducers/alert";
 
 function AnchorList() {
   const { futureAnchors, nowAnchors, loading } = useSelector(
@@ -22,17 +24,37 @@ function AnchorList() {
     );
     return done;
   });
-
   const todoAnchor = nowAnchors.filter(
     (anchor) => !doneAnchors.includes(anchor)
   );
+
+  const dispatch = useDispatch();
+  const alerting = (msg, alertType) => {
+    dispatch(setAlert(msg, alertType));
+  };
+  const handleSubmit = async (anchorInfo) => {
+    try {
+      await dispatch(createAnchor(anchorInfo)).unwrap();
+    } catch (err) {
+      const errors = err.errors;
+      errors.forEach((error) => {
+        alerting(error.msg, "error");
+      });
+    }
+  };
 
   return loading ? (
     <Spinner />
   ) : (
     <div className="anchorList">
       {/*  ------------------------create new anchor--------------------------*/}
-      <AnchorForm />
+      <AnchorForm
+        Ptitle=""
+        Pcolor="#fff"
+        Pfrom={moment(new Date()).startOf("day")._d}
+        Pto={Date}
+        handleSubmit={handleSubmit}
+      />
 
       {/*------------------------- anchors list -------------------------------*/}
       {todoAnchor.map((anchor) => (

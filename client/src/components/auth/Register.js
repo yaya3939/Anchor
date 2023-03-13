@@ -28,7 +28,7 @@ export const Register = () => {
     } else {
       try {
         await dispatch(registerUser({ name, email, password })).unwrap();
-        await dispatch(loadUser());
+        dispatch(loadUser());
       } catch (error) {
         const errors = error.errors;
         errors.forEach((error) => {

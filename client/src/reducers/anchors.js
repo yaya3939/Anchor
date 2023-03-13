@@ -113,8 +113,9 @@ export const updateAnchor = createAsyncThunk(
     };
     const body = JSON.stringify(anchorInfo);
     try {
-      await axios.put(`/api/anchors/record/${anchorId}`, body, config);
+      await axios.put(`/api/anchors/${anchorId}`, body, config);
       await dispatch(getAnchorById(anchorId));
+      dispatch(getAnchors());
     } catch (err) {
       return rejectWithValue(err.response.data);
     }

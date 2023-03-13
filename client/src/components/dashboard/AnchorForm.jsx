@@ -1,25 +1,31 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import moment from "moment/moment";
 import { AddBox } from "@mui/icons-material";
 import ColorPicker from "../utils/ColorPicker";
 import Daypicker from "../utils/DatePicker";
 import { getDays } from "../utils/DatePicker";
 
-import { useDispatch } from "react-redux";
-import { createAnchor } from "../../reducers/anchors";
-import { setAlert } from "../../reducers/alert";
-
-export default function AnchorForm() {
-  const dispatch = useDispatch();
-
+export default function AnchorForm({
+  Ptitle,
+  Pcolor,
+  Pfrom,
+  Pto,
+  handleSubmit,
+}) {
   const today = moment(new Date()).startOf("day")._d; //make time 00:00
   const [anchorInfo, setAnchorInfo] = useState({
-    title: "",
-    color: "#fff",
-    from: today,
-    to: Date,
+    title: Ptitle,
+    color: Pcolor,
+    from: new Date(Pfrom),
+    to: new Date(Pto),
   });
   const { title, color, from, to } = anchorInfo;
+
+  let past = false;
+  if (new Date(Pto).getTime() < new Date().getTime()) {
+    past = true;
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,20 +50,6 @@ export default function AnchorForm() {
     days = "Everyday";
   }
 
-  const alerting = (msg, alertType) => {
-    dispatch(setAlert(msg, alertType));
-  };
-  const handleSubmit = async () => {
-    try {
-      await dispatch(createAnchor(anchorInfo)).unwrap();
-    } catch (err) {
-      const errors = err.errors;
-      errors.forEach((error) => {
-        alerting(error.msg, "error");
-      });
-    }
-  };
-
   return (
     <table className="anchorItem cloudedGlass">
       <tbody>
@@ -70,12 +62,14 @@ export default function AnchorForm() {
               value={title}
               onChange={handleChange}
             />
-            <Daypicker
-              changedDay={days}
-              today={today}
-              range={{ from, to }}
-              setRange={handleRange}
-            />
+            {!past && (
+              <Daypicker
+                changedDay={days}
+                today={today}
+                range={{ from, to }}
+                setRange={handleRange}
+              />
+            )}
           </td>
           <td>
             <ColorPicker
@@ -90,7 +84,7 @@ export default function AnchorForm() {
             <button
               className="transparent addAnchor"
               onClick={() => {
-                handleSubmit();
+                handleSubmit(anchorInfo);
                 setAnchorInfo({
                   title: "",
                   color: "#fff",
@@ -107,3 +101,9 @@ export default function AnchorForm() {
     </table>
   );
 }
+
+AnchorForm.propTypes = {
+  Ptitle: PropTypes.string.isRequired,
+  Pcolor: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};

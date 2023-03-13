@@ -43,6 +43,10 @@ body {
   font-size: 1.2rem;
 }
 
+.small {
+  font-size: 1rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -436,7 +440,7 @@ button {
   margin: 5px auto;
 }
 
-.deleteRecord {
+.textBtn {
   background-color: transparent;
   border: none;
 }
