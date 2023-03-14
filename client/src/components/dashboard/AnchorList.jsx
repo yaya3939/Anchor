@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import startOfDay from "date-fns/startOfDay";
 import AnchorItem from "./AnchorItem";
 import AnchorForm from "./AnchorForm";
 import FutureRight from "./FutureRight";
@@ -19,8 +20,7 @@ function AnchorList() {
     let done = anchor.records.some(
       ({ date }) =>
         date &&
-        moment(date).format("YYYY/MM/DD") ===
-          moment(new Date()).format("YYYY/MM/DD")
+        moment(date).format("YY/M/D") === moment(new Date()).format("YY/M/D")
     );
     return done;
   });
@@ -51,8 +51,7 @@ function AnchorList() {
       <AnchorForm
         Ptitle=""
         Pcolor="#fff"
-        Pfrom={moment(new Date()).startOf("day")._d}
-        Pto={Date}
+        Pfrom={startOfDay(new Date())}
         handleSubmit={handleSubmit}
       />
 

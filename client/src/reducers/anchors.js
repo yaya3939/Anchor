@@ -56,15 +56,11 @@ export const createAnchor = createAsyncThunk(
 export const deleteAnchor = createAsyncThunk(
   "anchors/deleteAnchor",
   async (anchorId, { rejectWithValue, dispatch }) => {
-    if (
-      window.confirm("You're deleting this anchor! This can NOT be undone!")
-    ) {
-      try {
-        await axios.delete(`/api/anchors/${anchorId}`);
-        await dispatch(getAnchors());
-      } catch (err) {
-        return rejectWithValue(err.response.data);
-      }
+    try {
+      await axios.delete(`/api/anchors/${anchorId}`);
+      await dispatch(getAnchors());
+    } catch (err) {
+      return rejectWithValue(err.response.data);
     }
   }
 );

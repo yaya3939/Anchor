@@ -1,32 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-day-picker/dist/style.css";
 import { DayPicker } from "react-day-picker";
+import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 
 export function getDays(from, to) {
-  const diffDays = Math.round(
-    Math.abs(
-      (new Date(to).getTime() - new Date(from).getTime()) /
-        (24 * 60 * 60 * 1000)
-    )
-  );
-  const anchorDays = diffDays + 1;
-  return anchorDays;
+  //[from,to]
+  const days = differenceInCalendarDays(to, from) + 1;
+  return days;
 }
 
 export default function Daypicker(props) {
-  const [dateDisplayed, setDateDisplayed] = useState(false);
-  function dateDisplay() {
-    setDateDisplayed(!dateDisplayed);
-  }
-
   return (
     <div className="blocks">
-      <div className="mg-center pointer" onClick={dateDisplay}>
+      <div className="mg-center pointer" onClick={props.onDisplay}>
         {props.changedDay}
       </div>
-      {dateDisplayed && (
+      {props.dateDisplay && (
         <DayPicker
-          captionLayout="dropdown" /* 没用 不知道为啥 */
           styles={{
             root: {
               backgroundColor: "gray",

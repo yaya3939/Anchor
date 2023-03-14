@@ -53,7 +53,10 @@ const NowRight = ({ anchor: { color, _id }, isDone }) => {
           rate={rate}
           handleRate={handleRate}
         />
-        <button className="transparent pointer" onClick={handleSubmit}>
+        <button
+          className="transparent text-gray1 pointer"
+          onClick={handleSubmit}
+        >
           <AddBox />
         </button>
       </div>

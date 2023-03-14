@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import moment from "moment/moment";
+import startOfDay from "date-fns/startOfDay";
 import { AddBox } from "@mui/icons-material";
 import ColorPicker from "../utils/ColorPicker";
 import Daypicker from "../utils/DatePicker";
@@ -13,7 +13,7 @@ export default function AnchorForm({
   Pto,
   handleSubmit,
 }) {
-  const today = moment(new Date()).startOf("day")._d; //make time 00:00
+  const today = startOfDay(new Date()); //make time 00:00
   const [anchorInfo, setAnchorInfo] = useState({
     title: Ptitle,
     color: Pcolor,
@@ -26,6 +26,15 @@ export default function AnchorForm({
   if (new Date(Pto).getTime() < new Date().getTime()) {
     past = true;
   }
+
+  //[from,to]
+  let days = getDays(from, to);
+  if (isNaN(days)) {
+    days = "Everyday";
+  }
+
+  const [displayDate, setDisplayDate] = useState(false);
+  const [displayColor, setDisplayColor] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -45,11 +54,6 @@ export default function AnchorForm({
       });
   };
 
-  let days = getDays(from, to);
-  if (isNaN(days)) {
-    days = "Everyday";
-  }
-
   return (
     <table className="anchorItem cloudedGlass">
       <tbody>
@@ -68,6 +72,11 @@ export default function AnchorForm({
                 today={today}
                 range={{ from, to }}
                 setRange={handleRange}
+                dateDisplay={displayDate}
+                onDisplay={() => {
+                  setDisplayDate(!displayDate);
+                  setDisplayColor(false);
+                }}
               />
             )}
           </td>
@@ -78,11 +87,21 @@ export default function AnchorForm({
               }}
               color={color}
               colorChange={handleColor}
+              colorDisplay={displayColor}
+              onDisplay={() => {
+                setDisplayColor(!displayColor);
+                setDisplayDate(false);
+              }}
             />
           </td>
-          <td>
+          <td
+            onClick={() => {
+              setDisplayColor(false);
+              setDisplayDate(false);
+            }}
+          >
             <button
-              className="transparent addAnchor"
+              className="transparent text-gray1 addAnchor"
               onClick={() => {
                 handleSubmit(anchorInfo);
                 setAnchorInfo({

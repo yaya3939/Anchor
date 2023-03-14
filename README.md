@@ -145,3 +145,16 @@ router 开始。anchors page 进行中。
 - [x] update anchorInfo
 - [ ] update record text
 - [ ] 看情况，把 createAsyncThunk 改成 RTK query
+
+**3/14**
+
+- [x] 改善 deleteAnchor confirm 取消也跳转回 dashboard
+      move window.confirm from reducer to page component
+- [x] improve auto close of colorPicker&datePicker
+      lifting state up
+- [x] change Flex into Grid
+      dashboard anchorList recordList
+- [x] improve wrong days shown when to is null(click datePicker ? no to : to === null)
+      conditional syntax
+- [x] improve diffDays, smt it will be 1 day more than needed
+      date-fns

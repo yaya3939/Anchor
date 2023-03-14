@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import AnchorList from "./AnchorList";
@@ -22,14 +21,14 @@ export default function Dashboard() {
   );
 
   const dashboard = (
-    <Grid container spacing={5}>
-      <Grid item sm={6} md={4}>
+    <div className="dashboard">
+      <div>
         <TodoList />
-      </Grid>
-      <Grid item sm={6} md={7}>
+      </div>
+      <div>
         <AnchorList />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 
   return (

@@ -27,21 +27,28 @@ const Anchor = () => {
 
   const { anchor, loading } = useSelector((state) => state.anchors);
 
+  if (anchor !== null) {
+    var { title, color, from, to, records, _id } = anchor;
+  }
+  const fromD = new Date(from);
+  const toD = new Date(to);
+
   const [displayForm, setDisplayForm] = useState(false);
-  // const [displayInput, setDisplayInput] = useState(false);
 
   let daysAll = "";
   if (anchor !== null) {
-    new Date(anchor.to).getTime() < new Date().getTime()
-      ? (daysAll = getDays(anchor.from, anchor.to))
-      : (daysAll = getDays(anchor.from, new Date()));
+    toD.getTime() > new Date().getTime() || !to
+      ? (daysAll = getDays(fromD, new Date()) - 1) //nowAnchor [from,today)
+      : (daysAll = getDays(fromD, toD)); //pastAnchor [from,to]
   }
+
+  const formatD = (date) => moment(date).format("YY/M/D");
 
   const deleteR = async (record) => {
     try {
       await dispatch(
         deleteRecord({
-          anchorId: anchor._id,
+          anchorId: _id,
           recordId: record._id,
         })
       ).unwrap();
@@ -50,14 +57,22 @@ const Anchor = () => {
     }
   };
 
-  const alerting = (msg, alertType) => {
-    dispatch(setAlert(msg, alertType));
+  const deleteA = async () => {
+    if (
+      window.confirm("You're deleting this anchor! This can NOT be undone!")
+    ) {
+      try {
+        await dispatch(deleteAnchor(_id)).unwrap();
+        navigate("/");
+      } catch (err) {
+        console.log(err.errors);
+      }
+    }
   };
+
   const handleSubmit = async (anchorInfo) => {
     try {
-      await dispatch(
-        updateAnchor({ anchorInfo, anchorId: anchor._id })
-      ).unwrap();
+      await dispatch(updateAnchor({ anchorInfo, anchorId: _id })).unwrap();
       alerting("Update successfully!", "success");
       setDisplayForm(false);
     } catch (err) {
@@ -67,79 +82,61 @@ const Anchor = () => {
       });
     }
   };
+  function alerting(msg, alertType) {
+    dispatch(setAlert(msg, alertType));
+  }
 
   return loading || anchor === null ? (
     <Spinner />
   ) : (
     <div className="mg-center text-gray1">
       <h1 className="text-center">
-        <span style={{ color: `${anchor.color}` }}>{anchor.title}</span>
+        <span style={{ color: `${color}` }}>{title}</span>
         <span className="normal"> / {daysAll}</span>
-        <span className="normal"> / {anchor.records.length}</span>
+        <span className="normal"> / {records.length}</span>
       </h1>
       <p className="text-gray2 text-center">
-        <span className="small">{moment(anchor.from).format("YY/M/D")}</span>
+        <span className="small">{formatD(from)}</span>
         <span className="pd-horizon">--</span>
-        <span className="small">
-          {anchor.to ? moment(anchor.to).format("YY/M/D") : "everyday"}
-        </span>
+        <span className="small">{to ? formatD(to) : "everyday"}</span>
       </p>
       <div className="centerBlock">cal of records</div>
       <div className="cloudedGlass recordsBlock mg-center">
-        {anchor.records.length > 0 &&
-          anchor.records.map((record) => (
+        {records.length > 0 &&
+          records.map((record) => (
             <div key={record._id} className="recordBlock">
-              <div className="layout">
-                <div
-                  className="recordDot"
-                  style={{ backgroundColor: `${anchor.color}` }}
-                ></div>
-                <div
-                  className="line"
-                  style={{ backgroundColor: `${anchor.color}` }}
-                ></div>
-              </div>
-              <div className="pd-horizon text-left">
+              <div
+                className="recordDot"
+                style={{ backgroundColor: `${color}` }}
+              ></div>
+              <div className="text-left recordText">
                 <p className="mg-center normal">{record.text}</p>
                 <span className="text-gray3">
                   {moment(record.date).format("M/D")}
                 </span>
-                {/* <button
-                  className="textBtn text-gray3 pd-horizon pointer"
-                  onClick={() => setDisplayInput(!displayInput)}
-                >
-                  edit
-                </button> */}
-                {moment(record.date).format("MM/DD") ===
-                  moment(new Date()).format("MM/DD") && (
+                {formatD(record.date) === formatD(new Date()) && (
                   <button
-                    className="textBtn pointer text-gray3 pd-horizon"
+                    className="transparent pointer text-gray3 pd-horizon"
                     onClick={() => deleteR(record)}
                   >
                     delete
                   </button>
                 )}
               </div>
+              <div
+                className="line"
+                style={{ backgroundColor: `${color}` }}
+              ></div>
             </div>
           ))}
       </div>
       <div className="block text-center">
-        <button
-          className="transparent pointer"
-          onClick={async () => {
-            try {
-              await dispatch(deleteAnchor(anchor._id)).unwrap();
-              navigate("/");
-            } catch (err) {
-              console.log(err.errors);
-            }
-          }}
-        >
+        <button className="transparent text-gray1 pointer" onClick={deleteA}>
           <DeleteIcon />
         </button>
         <span className="lead pd-horizon">/</span>
         <button
-          className="transparent pointer"
+          className="transparent text-gray1 pointer"
           onClick={() => {
             setDisplayForm(!displayForm);
           }}
@@ -150,10 +147,10 @@ const Anchor = () => {
       <div className="text-center">
         {displayForm && (
           <AnchorForm
-            Ptitle={anchor.title}
-            Pcolor={anchor.color}
-            Pfrom={anchor.from}
-            Pto={anchor.to}
+            Ptitle={title}
+            Pcolor={color}
+            Pfrom={from}
+            Pto={to}
             handleSubmit={handleSubmit}
           />
         )}

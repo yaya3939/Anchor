@@ -53,7 +53,7 @@ function TodoList() {
           return (
             <li key={index}>
               <button
-                id="itemCheck"
+                className="transparent text-gray1 pointer"
                 onClick={() => {
                   deleteItem(index);
                 }}
@@ -66,7 +66,7 @@ function TodoList() {
         })}
         {displayInput && (
           <li>
-            <button id="itemCheck" className="invisible">
+            <button className="invisible">
               <CheckCircleOutlineIcon />
             </button>
             <InputArea

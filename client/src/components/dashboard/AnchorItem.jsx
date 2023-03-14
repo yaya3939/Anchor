@@ -9,14 +9,17 @@ import { deleteAnchor } from "../../reducers/anchors";
 
 export default function AnchorItem({ anchor, isNow, className, children }) {
   const navigate = useNavigate();
-  const today = new Date();
-  const daysCount = getDays(today, anchor.to);
-  const daysAll = getDays(anchor.from, anchor.to);
+  const { from, to, title, color, _id } = anchor;
+
+  //[today,to]
+  const daysCount = getDays(new Date(), new Date(to));
+  //[from,to]
+  const daysAll = getDays(new Date(from), new Date(to));
 
   const dispatch = useDispatch();
   const handleDelete = async () => {
     try {
-      await dispatch(deleteAnchor(anchor._id)).unwrap();
+      await dispatch(deleteAnchor(_id)).unwrap();
     } catch (err) {
       console.log(err.errors);
     }
@@ -29,15 +32,15 @@ export default function AnchorItem({ anchor, isNow, className, children }) {
           <td className="anchorLeft">
             <h1
               className="lead anchorTitle pointer"
-              style={{ backgroundColor: `${anchor.color}` }}
-              onClick={() => navigate(`/anchors/${anchor._id}`)}
+              style={{ backgroundColor: `${color}` }}
+              onClick={() => navigate(`/anchors/${_id}`)}
             >
-              {anchor.title}
+              {title}
             </h1>
             <hr />
             <p className="mg-center">
               {isNow
-                ? isNaN(daysCount)
+                ? isNaN(daysCount) || to === null
                   ? "Everyday"
                   : daysCount
                 : isNaN(daysAll)
@@ -45,15 +48,15 @@ export default function AnchorItem({ anchor, isNow, className, children }) {
                 : daysAll}
             </p>
           </td>
-          <td
-            className="anchorRight"
-            id={`Cal${anchor.title.split(" ").join("")}`}
-          >
+          <td className="anchorRight" id={`Cal${title.split(" ").join("")}`}>
             {children(anchor)}
           </td>
           {!isNow && (
             <td>
-              <button className="transparent pointer" onClick={handleDelete}>
+              <button
+                className="transparent text-gray1 pointer"
+                onClick={handleDelete}
+              >
                 <DeleteIcon />
               </button>
             </td>
