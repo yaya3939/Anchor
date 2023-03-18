@@ -45,7 +45,7 @@ function App() {
   useEffect(() => {
     (async function () {
       await dispatch(loadUser()).unwrap();
-      dispatch(getAnchors());
+      await dispatch(getAnchors());
     })();
   }, [dispatch]);
 

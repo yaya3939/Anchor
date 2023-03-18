@@ -237,11 +237,11 @@ button {
   width: 100%;
 }
 
-/* dashboard */
+/* grid board */
 @media only screen and (min-width: 700px) {
-  .dashboard {
+  .gridBoard {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 400px 1fr;
     column-gap: 10px;
     justify-items: center;
   }
@@ -276,8 +276,8 @@ button {
 .todoBlock {
   margin: 10px auto;
   width: 90%;
-  max-width: 310px;
-  min-width: 310px;
+  max-width: 350px;
+  min-width: 350px;
 }
 
 .todoBtn {
@@ -411,6 +411,17 @@ button {
 .pastAnchorLink {
   text-decoration: none;
   color: var(--primary-color);
+}
+
+.highlight {
+  stroke: #fff;
+  stroke-width: 0.5px;
+}
+
+.subdomain-text {
+  font-size: smaller;
+  fill: #7e7e7e;
+  stroke: none;
 }
 
 /* anchor page */

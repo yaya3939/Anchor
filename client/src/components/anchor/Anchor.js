@@ -86,6 +86,31 @@ const Anchor = () => {
     dispatch(setAlert(msg, alertType));
   }
 
+  function opacity(rate) {
+    let value = 0;
+    switch (rate) {
+      case 1:
+        value = 0.2;
+        break;
+      case 2:
+        value = 0.4;
+        break;
+      case 3:
+        value = 0.6;
+        break;
+      case 4:
+        value = 0.8;
+        break;
+      case 5:
+        value = 1;
+        break;
+      default:
+        value = 0;
+        break;
+    }
+    return value;
+  }
+
   return loading || anchor === null ? (
     <Spinner />
   ) : (
@@ -100,14 +125,17 @@ const Anchor = () => {
         <span className="pd-horizon">--</span>
         <span className="small">{to ? formatD(to) : "everyday"}</span>
       </p>
-      <div className="centerBlock">cal of records</div>
+      {/* <div className="centerBlock">cal of records</div> */}
       <div className="cloudedGlass recordsBlock mg-center">
         {records.length > 0 &&
           records.map((record) => (
             <div key={record._id} className="recordBlock">
               <div
                 className="recordDot"
-                style={{ backgroundColor: `${color}` }}
+                style={{
+                  backgroundColor: `${color}`,
+                  opacity: opacity(record.rate),
+                }}
               ></div>
               <div className="text-left recordText">
                 <p className="mg-center normal">{record.text}</p>

@@ -28,6 +28,8 @@
   initializer syntax & currying， 但是实际使用会出现 error:this is
   undefined. _/
 
+  - cal heat map in anchor page
+
   **DONE**
 
   - [x] 完成的 anchor 自动排序到未完成的下面
@@ -70,7 +72,7 @@ router 开始。anchors page 进行中。
   - [ ] 没有任何 item 的时候：你还没有任何 anchor 记录，快去创建一个吧！
   - [ ] 进行时：显示当月全部记录，颜色，灰色+四个等级差， 0 和未评价显示灰色。一行八个，四行。
         未开始（暂时不做，必要性不强）
-  - [ ] 已完成：放在一个 toggle 栏里，显示最后一个月，其余显示与进行时一致
+  - [x] 已完成：放在一个 toggle 栏里，显示最后一个月，其余显示与进行时一致
 - 内置两个 item，
   设置当月月份的颜色表，每个格子要和日期对应，然后加上 object 里的 rate，color 去显示 color
   颜色，利用 date 确认位置，rate 和 color，rbga 来控制颜色
@@ -127,7 +129,7 @@ router 开始。anchors page 进行中。
 
 **3/7**
 
-- [ ] todoList 不够响应式，li element 会影响 block 的宽度。
+- [x] todoList 不够响应式，li element 会影响 block 的宽度。
       而且 mui 的 grid 下面的那个不知道为什么不占整个 vw，而是随着 todoList 的大小改变，导致 todoList 无法居中
       感觉还是 width/max-width/min-width 的组合问题
 
@@ -141,7 +143,7 @@ router 开始。anchors page 进行中。
 
 **3/13**
 
-- [ ] 把 dashboard 的 anchor table 和 anchor page 的 record block 都从 flex 布局改成 grid。
+- [x] 把 dashboard 的 anchor table 和 anchor page 的 record block 都从 flex 布局改成 grid。
 - [x] update anchorInfo
 - [ ] update record text
 - [ ] 看情况，把 createAsyncThunk 改成 RTK query
@@ -158,3 +160,14 @@ router 开始。anchors page 进行中。
       conditional syntax
 - [x] improve diffDays, smt it will be 1 day more than needed
       date-fns
+
+**3/16**
+cal heatmap:
+
+- [x] get dates [from,...,today].
+      in anchors page, only show last 21 days,
+      in anchor page, now: show all, past: show [from,...,to]
+- [x] combine dates with records. get full data
+      how to compare date : getTime()比较，Date 相减==0. Date 不能直接比较
+- [x] according data, use d3 to create map
+      学了 d3 但最后还是用的 api，没有自己做

@@ -22,6 +22,7 @@ const StyledRating = styled(Rating)({});
 // }
 
 export default function Progress({ ratingcolor, rate, handleRate }) {
+  // eslint-disable-next-line
   const [hover, setHover] = useState(-1);
 
   return (

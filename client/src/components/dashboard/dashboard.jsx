@@ -21,7 +21,7 @@ export default function Dashboard() {
   );
 
   const dashboard = (
-    <div className="dashboard">
+    <div className="gridBoard">
       <div>
         <TodoList />
       </div>
