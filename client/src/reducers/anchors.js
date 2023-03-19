@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//----- /
 //get all user's anchors
 export const getAnchors = createAsyncThunk(
   "anchors/getAllAnchor",
@@ -118,6 +117,26 @@ export const updateAnchor = createAsyncThunk(
   }
 );
 
+//delete record
+export const deleteRecord = createAsyncThunk(
+  "anchors/deleteRecord",
+  async ({ anchorId, recordId }, { rejectWithValue, dispatch }) => {
+    if (
+      window.confirm(
+        "You're deleting today's record. You can add a new record for today later."
+      )
+    ) {
+      try {
+        await axios.delete(`/api/anchors/record/${anchorId}/${recordId}`);
+        await dispatch(getAnchorById(anchorId));
+        await dispatch(getAnchors());
+      } catch (err) {
+        return rejectWithValue(err.response.data);
+      }
+    }
+  }
+);
+
 //update record text
 export const updateRecord = createAsyncThunk(
   "anchors/updateRecord",
@@ -136,26 +155,6 @@ export const updateRecord = createAsyncThunk(
       await dispatch(getAnchorById(anchorId));
     } catch (err) {
       return rejectWithValue(err.response.data);
-    }
-  }
-);
-
-//delete record
-export const deleteRecord = createAsyncThunk(
-  "anchors/deleteRecord",
-  async ({ anchorId, recordId }, { rejectWithValue, dispatch }) => {
-    if (
-      window.confirm(
-        "You're deleting today's record. You can add a new record for today later."
-      )
-    ) {
-      try {
-        await axios.delete(`/api/anchors/record/${anchorId}/${recordId}`);
-        await dispatch(getAnchorById(anchorId));
-        await dispatch(getAnchors());
-      } catch (err) {
-        return rejectWithValue(err.response.data);
-      }
     }
   }
 );

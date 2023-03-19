@@ -9,6 +9,8 @@ import { deleteAnchor } from "../../reducers/anchors";
 
 export default function AnchorItem({ anchor, isNow, className, children }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { from, to, title, color, _id } = anchor;
 
   //[today,to]
@@ -16,7 +18,6 @@ export default function AnchorItem({ anchor, isNow, className, children }) {
   //[from,to]
   const daysAll = getDays(new Date(from), new Date(to));
 
-  const dispatch = useDispatch();
   const handleDelete = async () => {
     try {
       await dispatch(deleteAnchor(_id)).unwrap();

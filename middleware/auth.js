@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWTSECRET);
-    req.user = decoded.user; //asign user to req, then we can use it in every route
+    req.user = decoded.user;
     next();
   } catch (err) {
     return res.status(401).json({ msg: "Token is not valid" });

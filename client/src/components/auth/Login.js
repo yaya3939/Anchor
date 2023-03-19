@@ -19,8 +19,6 @@ export const Login = () => {
     setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
   };
 
-  const alerting = (msg, alertType) => dispatch(setAlert(msg, alertType));
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -33,6 +31,9 @@ export const Login = () => {
       });
     }
   };
+  function alerting(msg, alertType) {
+    dispatch(setAlert(msg, alertType));
+  }
 
   if (authenticated) {
     return <Navigate to="/" />;

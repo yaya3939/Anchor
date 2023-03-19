@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-
 import AnchorList from "./AnchorList";
 import TodoList from "./TodoList";
 import Spinner from "../layout/Spinner";

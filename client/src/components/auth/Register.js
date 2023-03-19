@@ -19,8 +19,6 @@ export const Register = () => {
     setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
   };
 
-  const alerting = (msg, alertType) => dispatch(setAlert(msg, alertType));
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== password2) {
@@ -37,6 +35,9 @@ export const Register = () => {
       }
     }
   };
+  function alerting(msg, alertType) {
+    dispatch(setAlert(msg, alertType));
+  }
 
   const { authenticated } = useSelector((state) => state.auth);
   if (authenticated) {

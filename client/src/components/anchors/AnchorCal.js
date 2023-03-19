@@ -19,6 +19,7 @@ const AnchorCal = ({ anchor: { title, color, from, to, records } }) => {
   const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
   const datesMonth = getDatesInRange(firstDay, lastDay);
+
   const dataset = datesMonth.map((d) => {
     const correcord = records.find(
       (record) => new Date(record.date).getDate() === new Date(d).getDate()
@@ -38,6 +39,7 @@ const AnchorCal = ({ anchor: { title, color, from, to, records } }) => {
       start: new Date(),
       highlight: [new Date(from), new Date(to), new Date()],
       locale: { weekStart: 1 },
+      timezone: "Asia/Hong_Kong", //not work
     },
     scale: {
       opacity: {

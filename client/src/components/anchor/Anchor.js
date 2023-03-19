@@ -44,6 +44,31 @@ const Anchor = () => {
 
   const formatD = (date) => moment(date).format("YY/M/D");
 
+  function opacity(rate) {
+    let value = 0;
+    switch (rate) {
+      case 1:
+        value = 0.2;
+        break;
+      case 2:
+        value = 0.4;
+        break;
+      case 3:
+        value = 0.6;
+        break;
+      case 4:
+        value = 0.8;
+        break;
+      case 5:
+        value = 1;
+        break;
+      default:
+        value = 0;
+        break;
+    }
+    return value;
+  }
+
   const deleteR = async (record) => {
     try {
       await dispatch(
@@ -86,31 +111,6 @@ const Anchor = () => {
     dispatch(setAlert(msg, alertType));
   }
 
-  function opacity(rate) {
-    let value = 0;
-    switch (rate) {
-      case 1:
-        value = 0.2;
-        break;
-      case 2:
-        value = 0.4;
-        break;
-      case 3:
-        value = 0.6;
-        break;
-      case 4:
-        value = 0.8;
-        break;
-      case 5:
-        value = 1;
-        break;
-      default:
-        value = 0;
-        break;
-    }
-    return value;
-  }
-
   return loading || anchor === null ? (
     <Spinner />
   ) : (
@@ -125,7 +125,7 @@ const Anchor = () => {
         <span className="pd-horizon">--</span>
         <span className="small">{to ? formatD(to) : "everyday"}</span>
       </p>
-      {/* <div className="centerBlock">cal of records</div> */}
+      {/* ----------todo : cal of records-------------- */}
       <div className="cloudedGlass recordsBlock mg-center">
         {records.length > 0 &&
           records.map((record) => (

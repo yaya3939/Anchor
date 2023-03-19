@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import InputArea from "../utils/InputArea";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-
 import localforage from "localforage";
 import { useLoaderData } from "react-router-dom";
+import InputArea from "../utils/InputArea";
 
 export async function loader() {
   const getItem = await localforage.getItem("items");
@@ -11,10 +10,10 @@ export async function loader() {
 }
 
 function TodoList() {
-  const [displayInput, setdisplayInput] = useState(false);
+  let loadItems = useLoaderData();
 
-  let loadItems = useLoaderData(); //只在页面刷新时load一次
   const [items, setItems] = useState([]);
+  const [displayInput, setdisplayInput] = useState(false);
 
   useEffect(() => {
     if (loadItems) {

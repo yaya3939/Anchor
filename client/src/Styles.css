@@ -136,7 +136,6 @@ body {
 /* theme */
 .darkMode {
   background-color: var(--black-color);
-  /* color: var(--gray1-color); */
 }
 
 /* Forms */
@@ -207,7 +206,6 @@ button {
 
 .content-container {
   padding-bottom: 100px;
-  /*margin无法解决因为位置不互斥，只能用padding强行加大content本身的面积制造距离  */
 }
 
 .navBar {
@@ -219,7 +217,6 @@ button {
 .navHome {
   position: relative;
   top: -3px;
-  /* 解决文字与图片位置中线不一致 */
 }
 
 .centerBlock a {
@@ -232,7 +229,6 @@ button {
   position: absolute;
   /*to mycontainer, 但是因为中间的content里加了npm所以他和content的盒子之间的位置不是互斥的，出现占位问题*/
   bottom: 0px;
-  /* margin: 10px 0; */
   text-align: center;
   width: 100%;
 }
@@ -304,7 +300,6 @@ button {
   color: var(--gray1-color);
   border: none;
   word-wrap: break-word;
-  /* 中文会自动换行，但英文如果没有这项就不会换行 */
 }
 
 .itemInput {

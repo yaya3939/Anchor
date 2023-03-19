@@ -13,7 +13,6 @@ export default function AnchorForm({
   Pto,
   handleSubmit,
 }) {
-  const today = startOfDay(new Date()); //make time 00:00
   const [anchorInfo, setAnchorInfo] = useState({
     title: Ptitle,
     color: Pcolor,
@@ -22,8 +21,10 @@ export default function AnchorForm({
   });
   const { title, color, from, to } = anchorInfo;
 
+  const now = new Date();
+
   let past = false;
-  if (new Date(Pto).getTime() < new Date().getTime()) {
+  if (startOfDay(new Date(Pto)).getTime() < startOfDay(now).getTime()) {
     past = true;
   }
 
@@ -48,7 +49,7 @@ export default function AnchorForm({
     });
   };
   const handleRange = (range) => {
-    range && //如果点到同一天，range会变成undefine然后页面崩溃
+    range && //avoid crash caused by range=undefine when from=to
       setAnchorInfo((prevVa) => {
         return { ...prevVa, from: range.from, to: range.to };
       });
@@ -69,7 +70,7 @@ export default function AnchorForm({
             {!past && (
               <Daypicker
                 changedDay={days}
-                today={today}
+                today={now}
                 range={{ from, to }}
                 setRange={handleRange}
                 dateDisplay={displayDate}
@@ -107,7 +108,7 @@ export default function AnchorForm({
                 setAnchorInfo({
                   title: "",
                   color: "#fff",
-                  from: today,
+                  from: now,
                   to: Date,
                 });
               }}

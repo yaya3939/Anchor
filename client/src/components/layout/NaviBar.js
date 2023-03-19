@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { Breadcrumbs } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AnchorIcon from "@mui/icons-material/Anchor";
-// import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../reducers/auth";
@@ -40,14 +39,6 @@ function NaviBar() {
             <AnchorIcon />
           </NavLink>
         )}
-        {/* {authenticated && !loading && (
-          <NavLink
-            to="/calender"
-            className={({ isActive }) => (isActive ? "active" : "unactive")}
-          >
-            <CalendarMonthIcon />
-          </NavLink>
-        )} */}
         {authenticated && !loading && (
           <NavLink
             to="/"

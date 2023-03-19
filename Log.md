@@ -5,30 +5,11 @@
   另一个选择：保留 progress 新增一个记录量/时间的模块，自定义数量 自定义单位
 - 给 anchor 分组
 - 把 todo list 的模型加入 record 的输入和记录
-- todo list content editable:
-  ` async function changeItem(id, event) {`
-  `    const changedValue = event.target.innerText;`
-  `   const changeItems = items.map((item, index) => {`
-  `     if (index === id) {`
-  `       return changedValue;`
-  `      } else {`
-  `        return item;`
-  `      }`
-  `    });`
-  `    setItems(changeItems);`
-  `    // 其实暂时来说这个function有没有都没影响，因为这个app都没有后台，`
-  `    // 刷新的话state都会重置，不刷新即使不更改state的信息，显示的也是更改的值`
-  `  }`
-  `suppressContentEditableWarning`
-  `contentEditable`
-  `onChange={(event) => changeItem(index, event)}`
-  /_ 这个方式可以使得 changeItem 这个 EVENT handler 能加入除 event 外的参数，
-  但也会使得每次这个组件渲染时都会创建一个新的 callback instance，
-  后期可以想一下怎么改进. freecodecamp 给的一个方案：use property
-  initializer syntax & currying， 但是实际使用会出现 error:this is
-  undefined. _/
-
-  - cal heat map in anchor page
+- todo list content editable
+- record text editable
+- cal heat map in anchor page
+- another kind of cal heatmap for anchors:
+  last 21 days heatmap, hightlight from
 
   **DONE**
 
@@ -69,7 +50,8 @@ router 开始。anchors page 进行中。
 
 - [x] navi bar 没有按照当前页面标识点亮，加载时的 ux 极差
 - anchors page：
-  - [ ] 没有任何 item 的时候：你还没有任何 anchor 记录，快去创建一个吧！
+  - [x] 没有任何 item 的时候：你还没有任何 anchor 记录，快去创建一个吧！
+        cause anchorForm display forever, so don't need it now.
   - [ ] 进行时：显示当月全部记录，颜色，灰色+四个等级差， 0 和未评价显示灰色。一行八个，四行。
         未开始（暂时不做，必要性不强）
   - [x] 已完成：放在一个 toggle 栏里，显示最后一个月，其余显示与进行时一致
@@ -171,3 +153,4 @@ cal heatmap:
       how to compare date : getTime()比较，Date 相减==0. Date 不能直接比较
 - [x] according data, use d3 to create map
       学了 d3 但最后还是用的 api，没有自己做
+- [ ] 在已有 heatmap 且 data 不改变时，只渲染一次 heatmap
