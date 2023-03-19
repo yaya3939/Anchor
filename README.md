@@ -1,7 +1,6 @@
 # :anchor: Anchor
 
-<center> <a href='#anchor-app'>English</a> </center>
-<br/>
+<p align="center"> <a href='#anchor-app'>English</a> </p>
 
 Hello, this is Anchor. 一个用于日常事项记录和可视化的 App，附带一个小小的 todo list。
 
